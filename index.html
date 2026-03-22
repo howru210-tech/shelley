@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shelley Event - 감성을 잇는 사진 공간</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Outfit and Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dark-mode">
+    <div id="app" class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header">
+            <div class="logo">Shelley <span>Event</span></div>
+            <div class="header-actions">
+                <button id="admin-toggle" class="icon-btn" title="관리자">
+                    <i data-lucide="shield"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main id="main-content" class="fade-in">
+            <!-- Dynamic content loaded here via app.js -->
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-view="home">
+                <i data-lucide="home"></i>
+                <span>홈</span>
+            </button>
+            <button class="nav-item" data-view="flow-selection">
+                <i data-lucide="camera"></i>
+                <span>촬영/조회</span>
+            </button>
+            <button class="nav-item" data-view="studio">
+                <i data-lucide="palette"></i>
+                <span>스튜디오</span>
+            </button>
+            <button class="nav-item" data-view="store">
+                <i data-lucide="shopping-bag"></i>
+                <span>스토어</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js" type="module"></script>
+</body>
+</html>
