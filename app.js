@@ -45,7 +45,9 @@ const i18n = {
         btn_start_creation: '작품 생성 시작하기', creation_tool_q: '무엇을 먼저 만드시겠어요?',
         btn_poetry: "'시' 쓰기", btn_music: '음악 만들기',
         share_title: '발표 준비', share_desc: '작업하신 멋진 작품을 다른 사람들과 함께 감상하시겠어요?',
-        btn_public: '공개 (공유)', btn_private: '비공개 (혼자 보기)', alert_privacy: '공개 여부를 먼저 선택해주세요.'
+        btn_public: '공개 (공유)', btn_private: '비공개 (혼자 보기)', alert_privacy: '공개 여부를 먼저 선택해주세요.',
+        modal_email_placeholder: '이메일 주소를 입력하세요', modal_or: '또는',
+        modal_google: 'Google 계정으로 연결', modal_facebook: 'Facebook 계정으로 연결', modal_kakao: 'Kakao 계정으로 연결'
     },
     en: {
         login: 'Login', logout: 'Logout',
@@ -68,7 +70,9 @@ const i18n = {
         btn_start_creation: 'Start Creation', creation_tool_q: 'What would you like to create first?',
         btn_poetry: 'Write Poetry', btn_music: 'Make Music',
         share_title: 'Share Readiness', share_desc: 'Would you like to enjoy your wonderful work with others?',
-        btn_public: 'Public (Share)', btn_private: 'Private (Only me)', alert_privacy: 'Please select public/private status first.'
+        btn_public: 'Public (Share)', btn_private: 'Private (Only me)', alert_privacy: 'Please select public/private status first.',
+        modal_email_placeholder: 'Enter your email address', modal_or: 'OR',
+        modal_google: 'Continue with Google', modal_facebook: 'Continue with Facebook', modal_kakao: 'Continue with Kakao'
     },
     zh: {
         login: '登录', logout: '登出',
@@ -91,7 +95,9 @@ const i18n = {
         btn_start_creation: '开始创作', creation_tool_q: '您想先创作什么？',
         btn_poetry: '写诗', btn_music: '制作音乐',
         share_title: '准备分享', share_desc: '您想与他人分享您的精彩作品吗？',
-        btn_public: '公开 (分享)', btn_private: '私密 (仅自己可见)', alert_privacy: '请先选择公开/私密状态。'
+        btn_public: '公开 (分享)', btn_private: '私密 (仅自己可见)', alert_privacy: '请先选择公开/私密状态。',
+        modal_email_placeholder: '请输入您的电子邮箱地址', modal_or: '或者',
+        modal_google: '连接 Google 账号', modal_facebook: '连接 Facebook 账号', modal_kakao: '连接 Kakao 账号'
     },
     es: {
         login: 'Iniciar sesión', logout: 'Cerrar sesión',
@@ -114,7 +120,9 @@ const i18n = {
         btn_start_creation: 'Empezar a crear', creation_tool_q: '¿Qué te gustaría crear primero?',
         btn_poetry: 'Escribir Poesía', btn_music: 'Hacer Música',
         share_title: 'Preparación', share_desc: '¿Te gustaría disfrutar de tu maravillosa obra con los demás?',
-        btn_public: 'Público (Compartir)', btn_private: 'Privado (Solo yo)', alert_privacy: 'Seleccione primero el estado público/privado.'
+        btn_public: 'Público (Compartir)', btn_private: 'Privado (Solo yo)', alert_privacy: 'Seleccione primero el estado público/privado.',
+        modal_email_placeholder: 'Introduzca su dirección de correo electrónico', modal_or: 'O',
+        modal_google: 'Conectar con Google', modal_facebook: 'Conectar con Facebook', modal_kakao: 'Conectar con Kakao'
     }
 };
 
@@ -127,6 +135,13 @@ window.updateStaticTexts = function() {
         const key = el.getAttribute('data-i18n');
         if (i18n[state.locale] && i18n[state.locale][key]) {
             el.textContent = i18n[state.locale][key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (i18n[state.locale] && i18n[state.locale][key]) {
+            el.setAttribute('placeholder', i18n[state.locale][key]);
         }
     });
 };
