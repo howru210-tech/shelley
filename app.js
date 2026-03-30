@@ -36,6 +36,7 @@ const i18n = {
         flow_b_title: '작품 감상하기',
         flow_b_desc: '보관함 속 잊고 있던 추억을 꺼내어 새로운 의미를 부여합니다.',
         home_news: '최근 소식',
+        news_title: 'Shelley 리트리트 이벤트', news_desc: '지금 바로 참여 신청을 확인하세요.',
         step_photo: '사진 선택', step_creation: '시/음악 제작', step_share: '발표/공유',
         step_photo_desc: '사진을 업로드하거나 직접 촬영하세요.',
         upload_folder: '내 폴더에서 선택', take_photo: '직접 사진 찍기'
@@ -52,6 +53,7 @@ const i18n = {
         flow_b_title: 'Appreciate Gallery',
         flow_b_desc: 'Bring out forgotten memories from the archive and give them new meaning.',
         home_news: 'Recent News',
+        news_title: 'Shelley Retreat Event', news_desc: 'Check your participation application right now.',
         step_photo: 'Select Photo', step_creation: 'Poetry/Music', step_share: 'Share',
         step_photo_desc: 'Upload a photo or take one directly.',
         upload_folder: 'Select from Folder', take_photo: 'Take a Photo'
@@ -68,6 +70,7 @@ const i18n = {
         flow_b_title: '欣赏画廊',
         flow_b_desc: '从档案中唤醒被遗忘的记忆并赋予新意。',
         home_news: '最新消息',
+        news_title: 'Shelley 务虚会活动', news_desc: '立即查看您的参与申请。',
         step_photo: '选择照片', step_creation: '诗歌/音乐创作', step_share: '分享',
         step_photo_desc: '上传照片或直接拍照。',
         upload_folder: '从文件夹中选择', take_photo: '直接拍照'
@@ -84,6 +87,7 @@ const i18n = {
         flow_b_title: 'Apreciar la galería',
         flow_b_desc: 'Saca a la luz recuerdos olvidados del archivo y dales un nuevo significado.',
         home_news: 'Noticias recientes',
+        news_title: 'Evento de Retiro Shelley', news_desc: 'Compruebe su solicitud de participación ahora mismo.',
         step_photo: 'Seleccionar foto', step_creation: 'Poesía/Música', step_share: 'Compartir',
         step_photo_desc: 'Sube una foto o tómala directamente.',
         upload_folder: 'Carpeta', take_photo: 'Cámara'
@@ -128,8 +132,8 @@ const views = {
             <div style="display:flex; gap:12px; align-items:center;">
                 <div style="width:60px; height:60px; background:#2d3463; border-radius:12px;"></div>
                 <div>
-                    <h4>Shelley 리트리트 이벤트</h4>
-                    <p style="font-size:0.8rem; color:var(--text-muted);">지금 바로 참여 신청을 확인하세요.</p>
+                    <h4>\${t('news_title') || 'Shelley 리트리트 이벤트'}</h4>
+                    <p style="font-size:0.8rem; color:var(--text-muted);">\${t('news_desc') || '지금 바로 참여 신청을 확인하세요.'}</p>
                 </div>
             </div>
         </div>
