@@ -171,8 +171,8 @@ const views = {
             <div style="display:flex; gap:12px; align-items:center;">
                 <div style="width:60px; height:60px; background:#2d3463; border-radius:12px;"></div>
                 <div>
-                    <h4>\${t('news_title') || 'Shelley 리트리트 이벤트'}</h4>
-                    <p style="font-size:0.8rem; color:var(--text-muted);">\${t('news_desc') || '지금 바로 참여 신청을 확인하세요.'}</p>
+                    <h4>${t('news_title') || 'Shelley 리트리트 이벤트'}</h4>
+                    <p style="font-size:0.8rem; color:var(--text-muted);">${t('news_desc') || '지금 바로 참여 신청을 확인하세요.'}</p>
                 </div>
             </div>
         </div>
@@ -333,22 +333,22 @@ function renderStepContent() {
                             <i data-lucide="pen-tool" style="width:32px; height:32px; color:var(--accent);"></i>
                             <i data-lucide="music" style="width:32px; height:32px; color:var(--primary);"></i>
                         </div>
-                        <h4>\${t('creation_title') || '나만의 시와 음악 만들기'}</h4>
-                        <p style="font-size:0.8rem; margin-top:8px; color:var(--text-muted);">\${t('creation_desc') || "사진의 감성을 '시'와 '음악'으로 승화시킵니다."}</p>
-                        <button class="btn-primary" style="margin-top:20px; width:auto; padding:12px 24px;" onclick="startCreation()">\${t('btn_start_creation') || '작품 생성 시작하기'}</button>
+                        <h4>${t('creation_title') || '나만의 시와 음악 만들기'}</h4>
+                        <p style="font-size:0.8rem; margin-top:8px; color:var(--text-muted);">${t('creation_desc') || "사진의 감성을 '시'와 '음악'으로 승화시킵니다."}</p>
+                        <button class="btn-primary" style="margin-top:20px; width:auto; padding:12px 24px;" onclick="startCreation()">${t('btn_start_creation') || '작품 생성 시작하기'}</button>
                     </div>
                 `;
             } else if (state.creationState === 'tools') {
                return `
-                    <h4 style="text-align:center; margin-bottom:20px;">\${t('creation_tool_q') || '무엇을 먼저 만드시겠어요?'}</h4>
+                    <h4 style="text-align:center; margin-bottom:20px;">${t('creation_tool_q') || '무엇을 먼저 만드시겠어요?'}</h4>
                     <div style="display:flex; gap:12px; justify-content:center;">
                         <button class="card clickable" style="flex:1; padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px; margin:0; background:var(--secondary);" onclick="goToCreation('poetry')">
                             <i data-lucide="pen-tool" style="width:32px; height:32px; color:var(--accent);"></i>
-                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">\${t('btn_poetry') || "'시' 쓰기"}</span>
+                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">${t('btn_poetry') || "'시' 쓰기"}</span>
                         </button>
                         <button class="card clickable" style="flex:1; padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px; margin:0; background:var(--secondary);" onclick="goToCreation('music')">
                             <i data-lucide="music" style="width:32px; height:32px; color:var(--primary);"></i>
-                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">\${t('btn_music') || '음악 만들기'}</span>
+                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">${t('btn_music') || '음악 만들기'}</span>
                         </button>
                     </div>
                 `;
