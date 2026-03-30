@@ -26,7 +26,9 @@ const state = {
 const i18n = {
     ko: {
         login: '로그인', logout: '로그아웃',
-        nav_home: '홈', nav_flow: '촬영/조회', nav_studio: '스튜디오', nav_store: '스토어',
+        nav_home: '홈', nav_flow: '보기/메모', nav_studio: '내 작품 모두', nav_store: '스토어',
+        mode_a_title: '보기-내 작품 모두', mode_b_title: '메모-연결 서비스', studio_title: '내 작품 모두', filter_text: '내가 쓴 글', filter_music: '음악', filter_all: '사진+글+음악', filter_desc: '생성 날짜 순으로 정렬됩니다.',
+        banner_title: '추천 연결 서비스', banner_desc: '사진과 함께 활용하기 좋은 앱을 소개합니다.', app_edit: '사진 꾸미기', app_frame: '디지털 액자', app_print: '사진 인쇄', app_music: '음악 만들기', app_link_desc: '추천 앱 이동',
         modal_title: '회원가입 / 로그인', modal_email_desc: '이메일 인증을 통해 간편하게 가입 및 로그인하세요.', modal_email_btn: '이메일로 계속하기',
         home_greetings: '안녕하세요, 작가님.',
         home_subtitle: '오늘의 순간을 특별한 기록으로 남겨보세요.',
@@ -51,7 +53,9 @@ const i18n = {
     },
     en: {
         login: 'Login', logout: 'Logout',
-        nav_home: 'Home', nav_flow: 'Capture/View', nav_studio: 'Studio', nav_store: 'Store',
+        nav_home: 'Home', nav_flow: 'View/Memo', nav_studio: 'All My Works', nav_store: 'Store',
+        mode_a_title: 'View - All My Works', mode_b_title: 'Memo - Connection Service', studio_title: 'All My Works', filter_text: 'My Texts', filter_music: 'Music', filter_all: 'Photo+Text+Music', filter_desc: 'Sorted by creation date.',
+        banner_title: 'Recommended Connection Services', banner_desc: 'Introducing great apps to use with your photos.', app_edit: 'Photo Decoration', app_frame: 'Digital Frame', app_print: 'Photo Print', app_music: 'Music Creation', app_link_desc: 'Go to recommended app',
         modal_title: 'Sign Up / Login', modal_email_desc: 'Easily sign up and login via email verification.', modal_email_btn: 'Continue with Email',
         home_greetings: 'Hello, Creator.',
         home_subtitle: 'Make today\'s moments a special record.',
@@ -76,7 +80,9 @@ const i18n = {
     },
     zh: {
         login: '登录', logout: '登出',
-        nav_home: '首页', nav_flow: '拍摄/查看', nav_studio: '工作室', nav_store: '商店',
+        nav_home: '首页', nav_flow: '查看/备忘录', nav_studio: '我所有的作品', nav_store: '商店',
+        mode_a_title: '查看 - 我所有的作品', mode_b_title: '备忘录 - 连接服务', studio_title: '我的所有作品', filter_text: '我写的文字', filter_music: '音乐', filter_all: '照片+文字+音乐', filter_desc: '按创建日期排序。',
+        banner_title: '推荐连接服务', banner_desc: '介绍与您的照片一起使用的好应用。', app_edit: '照片装饰', app_frame: '数码相框', app_print: '照片打印', app_music: '音乐制作', app_link_desc: '前往推荐应用',
         modal_title: '注册 / 登录', modal_email_desc: '通过电子邮件验证轻松注册和登录。', modal_email_btn: '使用电子邮件继续',
         home_greetings: '你好，创作者。',
         home_subtitle: '把今天的瞬间变成特别的记录。',
@@ -101,7 +107,9 @@ const i18n = {
     },
     es: {
         login: 'Iniciar sesión', logout: 'Cerrar sesión',
-        nav_home: 'Inicio', nav_flow: 'Captura/Vista', nav_studio: 'Estudio', nav_store: 'Tienda',
+        nav_home: 'Inicio', nav_flow: 'Ver/Memo', nav_studio: 'Todas mis obras', nav_store: 'Tienda',
+        mode_a_title: 'Ver - Todas mis obras', mode_b_title: 'Memo - Servicio de conexión', studio_title: 'Todas mis obras', filter_text: 'Mis textos', filter_music: 'Música', filter_all: 'Foto+Texto+Música', filter_desc: 'Ordenado por fecha de creación.',
+        banner_title: 'Servicios de conexión recomendados', banner_desc: 'Presentamos excelentes aplicaciones para usar con tus fotos.', app_edit: 'Decoración de fotos', app_frame: 'Marco digital', app_print: 'Impresión de fotos', app_music: 'Creación de música', app_link_desc: 'Ir a la aplicación',
         modal_title: 'Regístrate / Iniciar sesión', modal_email_desc: 'Regístrate e inicia sesión fácilmente mediante verificación por correo.', modal_email_btn: 'Continuar con correo',
         home_greetings: 'Hola, Creador.',
         home_subtitle: 'Haz de los momentos de hoy un registro especial.',
@@ -181,7 +189,7 @@ const views = {
     'flow-selection': () => `
         <h2 class="section-title">모드 선택</h2>
         <div class="card" onclick="navigateToFlow('A')">
-            <h3>촬영 후 기록 (Flow A)</h3>
+            <h3>${t('mode_a_title')}</h3>
             <ul style="margin-left: 1.2rem; margin-top: 8px; font-size: 0.85rem; color: var(--text-muted);">
                 <li>공유 사진 결정</li>
                 <li>촬영 의도 설명</li>
@@ -190,13 +198,77 @@ const views = {
             <button class="btn-primary" style="margin-top:16px;">시작하기</button>
         </div>
         <div class="card" onclick="navigateToFlow('B')">
-            <h3>기존 사진 조회 (Flow B)</h3>
+            <h3>${t('mode_b_title')}</h3>
             <ul style="margin-left: 1.2rem; margin-top: 8px; font-size: 0.85rem; color: var(--text-muted);">
                 <li>사진 아카이브 검색</li>
                 <li>선택 의도 기록</li>
                 <li>프리젠테이션 준비</li>
             </ul>
             <button class="btn-secondary" style="margin-top:16px;">시작하기</button>
+        </div>
+    `,
+
+    'connection-service': () => `
+        <h2 class="section-title">${t('mode_b_title')}</h2>
+        <div class="card fade-in">
+            <h3 style="margin-bottom:12px;">${t('banner_title')}</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:24px;">${t('banner_desc')}</p>
+
+            <div style="display:grid; grid-template-columns: 1fr; gap:16px;">
+                <!-- 사진 꾸미기 -->
+                <div class="banner-item" style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:12px; padding:16px;">
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                        <div style="width:40px; height:40px; background:var(--primary); border-radius:8px; display:flex; align-items:center; justify-content:center;">
+                            <i data-lucide="edit-3"></i>
+                        </div>
+                        <h4 style="margin:0;">${t('app_edit')}</h4>
+                    </div>
+                    <a href="https://vsco.co/" target="_blank" class="btn-secondary" style="display:block; text-align:center; padding:10px; text-decoration:none; font-size:0.85rem;">
+                        <i data-lucide="external-link" style="width:14px; height:14px; margin-right:4px; vertical-align:middle;"></i>${t('app_link_desc')} (VSCO)
+                    </a>
+                </div>
+
+                <!-- 디지털 액자 -->
+                <div class="banner-item" style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:12px; padding:16px;">
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                        <div style="width:40px; height:40px; background:var(--accent); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#000;">
+                            <i data-lucide="monitor"></i>
+                        </div>
+                        <h4 style="margin:0;">${t('app_frame')}</h4>
+                    </div>
+                    <a href="https://auraframes.com/" target="_blank" class="btn-secondary" style="display:block; text-align:center; padding:10px; text-decoration:none; font-size:0.85rem;">
+                        <i data-lucide="external-link" style="width:14px; height:14px; margin-right:4px; vertical-align:middle;"></i>${t('app_link_desc')} (Aura Frames)
+                    </a>
+                </div>
+
+                <!-- 사진 인쇄 -->
+                <div class="banner-item" style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:12px; padding:16px;">
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                        <div style="width:40px; height:40px; background:#4CAF50; border-radius:8px; display:flex; align-items:center; justify-content:center; color:white;">
+                            <i data-lucide="printer"></i>
+                        </div>
+                        <h4 style="margin:0;">${t('app_print')}</h4>
+                    </div>
+                    <a href="https://www.publog.co.kr/" target="_blank" class="btn-secondary" style="display:block; text-align:center; padding:10px; text-decoration:none; font-size:0.85rem;">
+                        <i data-lucide="external-link" style="width:14px; height:14px; margin-right:4px; vertical-align:middle;"></i>${t('app_link_desc')} (퍼블로그)
+                    </a>
+                </div>
+
+                <!-- 음악 만들기 -->
+                <div class="banner-item" style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:12px; padding:16px;">
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                        <div style="width:40px; height:40px; background:#E91E63; border-radius:8px; display:flex; align-items:center; justify-content:center; color:white;">
+                            <i data-lucide="music"></i>
+                        </div>
+                        <h4 style="margin:0;">${t('app_music')}</h4>
+                    </div>
+                    <a href="https://suno.com/" target="_blank" class="btn-secondary" style="display:block; text-align:center; padding:10px; text-decoration:none; font-size:0.85rem;">
+                        <i data-lucide="external-link" style="width:14px; height:14px; margin-right:4px; vertical-align:middle;"></i>${t('app_link_desc')} (Suno)
+                    </a>
+                </div>
+            </div>
+            
+            <button class="btn-secondary" style="width:100%; margin-top:24px;" onclick="state.currentView='flow-selection'; render();">${t('btn_prev') || '이전'}</button>
         </div>
     `,
 
@@ -221,16 +293,17 @@ const views = {
     },
 
     studio: () => `
-    <h2 class="section-title">스튜디오 & 수익화</h2>
+    <h2 class="section-title">${t('studio_title')}</h2>
     <div class="card">
         <h3>디지털 자산 관리 (Photo + Poem + Music)</h3>
         <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">사진에 감성을 더해 가치를 창출하세요.</p>
         
-        <div style="display:flex; gap:10px; margin-bottom:20px; overflow-x:auto; padding-bottom:10px;">
-            <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; font-size:0.85rem;">날짜순</button>
-            <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; font-size:0.85rem;">인물별</button>
-            <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; font-size:0.85rem;">위치별</button>
+        <div style="display:flex; gap:10px; margin-bottom:8px; overflow-x:auto; padding-bottom:10px;">
+            <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; font-size:0.85rem;">${t('filter_text')}</button>
+            <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; font-size:0.85rem;">${t('filter_music')}</button>
+            <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; font-size:0.85rem;">${t('filter_all')}</button>
         </div>
+        <p style="font-size:0.75rem; color:var(--text-muted); text-align:right; margin-bottom:20px;">✓ ${t('filter_desc')}</p>
 
         <div class="revenue-grid" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:12px;">
             <div class="card" style="margin:0; text-align:center;">
@@ -478,6 +551,11 @@ window.render = function () {
 };
 
 window.navigateToFlow = function (flowType) {
+    if (flowType === 'B') {
+        state.currentView = 'connection-service';
+        render();
+        return;
+    }
     state.flow = flowType;
     state.currentStep = 0;
     state.currentView = 'flow-wizard';
