@@ -30,9 +30,9 @@ const i18n = {
         home_greetings: '안녕하세요, 작가님.',
         home_subtitle: '오늘의 순간을 특별한 기록으로 남겨보세요.',
         home_start: '작업 시작하기',
-        flow_a_title: 'A. 방금 촬영한 사진으로',
+        flow_a_title: '작품 만들기',
         flow_a_desc: '방금 찍은 소중한 순간들을 바로 공유하고 이야기를 담아보세요.',
-        flow_b_title: 'B. 기존 사진 찾아보기',
+        flow_b_title: '작품 감상하기',
         flow_b_desc: '보관함 속 잊고 있던 추억을 꺼내어 새로운 의미를 부여합니다.',
         home_news: '최근 소식'
     },
