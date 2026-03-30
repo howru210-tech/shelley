@@ -40,7 +40,10 @@ const i18n = {
         step_photo: '사진 선택', step_creation: '시/음악 제작', step_share: '발표/공유',
         step_photo_desc: '사진을 업로드하거나 직접 촬영하세요.',
         upload_folder: '내 폴더에서 선택', take_photo: '직접 사진 찍기',
-        btn_prev: '이전', btn_next: '다음', btn_finish: '완료'
+        btn_prev: '이전', btn_next: '다음', btn_finish: '완료',
+        creation_title: '나만의 시와 음악 만들기', creation_desc: '사진의 감성을 시와 음악으로 승화시킵니다.',
+        btn_start_creation: '작품 생성 시작하기', creation_tool_q: '무엇을 먼저 만드시겠어요?',
+        btn_poetry: "'시' 쓰기", btn_music: '음악 만들기'
     },
     en: {
         login: 'Login', logout: 'Logout',
@@ -58,7 +61,10 @@ const i18n = {
         step_photo: 'Select Photo', step_creation: 'Poetry/Music', step_share: 'Share',
         step_photo_desc: 'Upload a photo or take one directly.',
         upload_folder: 'Select from Folder', take_photo: 'Take a Photo',
-        btn_prev: 'Previous', btn_next: 'Next', btn_finish: 'Finish'
+        btn_prev: 'Previous', btn_next: 'Next', btn_finish: 'Finish',
+        creation_title: 'Create Your Poetry & Music', creation_desc: 'Sublimate the emotion of the photo into poetry and music.',
+        btn_start_creation: 'Start Creation', creation_tool_q: 'What would you like to create first?',
+        btn_poetry: 'Write Poetry', btn_music: 'Make Music'
     },
     zh: {
         login: '登录', logout: '登出',
@@ -76,7 +82,10 @@ const i18n = {
         step_photo: '选择照片', step_creation: '诗歌/音乐创作', step_share: '分享',
         step_photo_desc: '上传照片或直接拍照。',
         upload_folder: '从文件夹中选择', take_photo: '直接拍照',
-        btn_prev: '上一步', btn_next: '下一步', btn_finish: '完成'
+        btn_prev: '上一步', btn_next: '下一步', btn_finish: '完成',
+        creation_title: '创作您的诗歌与音乐', creation_desc: '将照片的情感升华为诗歌与音乐。',
+        btn_start_creation: '开始创作', creation_tool_q: '您想先创作什么？',
+        btn_poetry: '写诗', btn_music: '制作音乐'
     },
     es: {
         login: 'Iniciar sesión', logout: 'Cerrar sesión',
@@ -94,7 +103,10 @@ const i18n = {
         step_photo: 'Seleccionar foto', step_creation: 'Poesía/Música', step_share: 'Compartir',
         step_photo_desc: 'Sube una foto o tómala directamente.',
         upload_folder: 'Carpeta', take_photo: 'Cámara',
-        btn_prev: 'Anterior', btn_next: 'Siguiente', btn_finish: 'Finalizar'
+        btn_prev: 'Anterior', btn_next: 'Siguiente', btn_finish: 'Finalizar',
+        creation_title: 'Crea tu poesía y música', creation_desc: 'Sublima la emoción de la foto en poesía y música.',
+        btn_start_creation: 'Empezar a crear', creation_tool_q: '¿Qué te gustaría crear primero?',
+        btn_poetry: 'Escribir Poesía', btn_music: 'Hacer Música'
     }
 };
 
@@ -290,7 +302,7 @@ function renderStepContent() {
                     <div class="gallery-item" onclick="selectPhoto(this)"><img src="sample_photo_2.png" alt="Camera" onerror="this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400'"></div>
                 </div>
             `;
-        case 1: // 시/음악 제작
+    case 1: // 시/음악 제작
             if (state.creationState === 'initial') {
                 return `
                     <div class="card artwork-gen" style="border: 2px dashed var(--primary); text-align:center; padding:30px 20px;">
@@ -298,22 +310,22 @@ function renderStepContent() {
                             <i data-lucide="pen-tool" style="width:32px; height:32px; color:var(--accent);"></i>
                             <i data-lucide="music" style="width:32px; height:32px; color:var(--primary);"></i>
                         </div>
-                        <h4>나만의 시와 음악 만들기</h4>
-                        <p style="font-size:0.8rem; margin-top:8px; color:var(--text-muted);">사진의 감성을 '시'와 '음악'으로 승화시킵니다.</p>
-                        <button class="btn-primary" style="margin-top:20px; width:auto; padding:12px 24px;" onclick="startCreation()">작품 생성 시작하기</button>
+                        <h4>\${t('creation_title') || '나만의 시와 음악 만들기'}</h4>
+                        <p style="font-size:0.8rem; margin-top:8px; color:var(--text-muted);">\${t('creation_desc') || "사진의 감성을 '시'와 '음악'으로 승화시킵니다."}</p>
+                        <button class="btn-primary" style="margin-top:20px; width:auto; padding:12px 24px;" onclick="startCreation()">\${t('btn_start_creation') || '작품 생성 시작하기'}</button>
                     </div>
                 `;
             } else if (state.creationState === 'tools') {
                return `
-                    <h4 style="text-align:center; margin-bottom:20px;">무엇을 먼저 만드시겠어요?</h4>
+                    <h4 style="text-align:center; margin-bottom:20px;">\${t('creation_tool_q') || '무엇을 먼저 만드시겠어요?'}</h4>
                     <div style="display:flex; gap:12px; justify-content:center;">
                         <button class="card clickable" style="flex:1; padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px; margin:0; background:var(--secondary);" onclick="goToCreation('poetry')">
                             <i data-lucide="pen-tool" style="width:32px; height:32px; color:var(--accent);"></i>
-                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">'시' 쓰기</span>
+                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">\${t('btn_poetry') || "'시' 쓰기"}</span>
                         </button>
                         <button class="card clickable" style="flex:1; padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px; margin:0; background:var(--secondary);" onclick="goToCreation('music')">
                             <i data-lucide="music" style="width:32px; height:32px; color:var(--primary);"></i>
-                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">음악 만들기</span>
+                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">\${t('btn_music') || '음악 만들기'}</span>
                         </button>
                     </div>
                 `;
