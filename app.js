@@ -17,7 +17,8 @@ const state = {
         poemMusic: null,
         poemText: '',
         subtitleEffect: '',
-        musicStyle: ''
+        musicStyle: '',
+        privacy: null
     },
     creationState: 'initial'
 };
@@ -399,12 +400,19 @@ function renderStepContent() {
         case 2: // 발표 준비/공유
             return `
                 <div class="card" style="text-align:center;">
-                    <i data-lucide="presentation" style="width:40px; height:40px; margin-bottom:12px;"></i>
-                    <h4>발표회 진행 및 공유</h4>
-                    <p style="font-size:0.9rem; color:var(--text-muted);">지금 이 순간의 감성을 대중 앞에 선보입니다.</p>
-                    <div style="margin-top:20px; padding:12px; background:var(--secondary); border-radius:12px;">
-                        <p>📍 발표 장소: 메인 스테이지</p>
-                        <p>⏰ 시간: 14:00 - 15:30</p>
+                    <i data-lucide="presentation" style="width:40px; height:40px; margin-bottom:12px; color:var(--primary);"></i>
+                    <h4 style="margin-bottom:8px;">발표 준비</h4>
+                    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:24px;">작업하신 멋진 작품을 다른 사람들과 함께 감상하시겠어요?</p>
+                    
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                        <button class="btn-secondary" style="padding:16px; display:flex; flex-direction:column; align-items:center; gap:12px; ${state.data.privacy === 'public' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="setPrivacy('public')">
+                            <i data-lucide="globe" style="width:24px; height:24px;"></i>
+                            <span style="font-weight:bold;">공개 (공유)</span>
+                        </button>
+                        <button class="btn-secondary" style="padding:16px; display:flex; flex-direction:column; align-items:center; gap:12px; ${state.data.privacy === 'private' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="setPrivacy('private')">
+                            <i data-lucide="lock" style="width:24px; height:24px;"></i>
+                            <span style="font-weight:bold;">비공개 (혼자 보기)</span>
+                        </button>
                     </div>
                 </div>
             `;
@@ -436,6 +444,13 @@ window.navigateToFlow = function (flowType) {
 
 window.nextStep = function () {
     const stepsArray = [t('step_photo'), t('step_creation'), t('step_share')];
+    
+    // 마지막 단계(발표 준비)에서 공개/비공개 선택 안 했을 경우 알림
+    if (state.currentStep === 2 && !state.data.privacy) {
+        alert('공개 여부를 먼저 선택해주세요.');
+        return;
+    }
+
     if (state.currentStep < stepsArray.length - 1) {
         state.currentStep++;
         render();
@@ -460,7 +475,8 @@ window.saveToSupabase = async function() {
                 poem_text: state.data.poemText,
                 music_style: state.data.musicStyle,
                 subtitle_effect: state.data.subtitleEffect,
-                flow_type: state.flow
+                flow_type: state.flow,
+                privacy: state.data.privacy
             }
         ]);
         
@@ -521,6 +537,15 @@ window.finishPoetry = function(action) {
 window.selectMusicStyle = function(style) {
     state.data.musicStyle = style;
     render();
+};
+
+window.setPrivacy = function(type) {
+    state.data.privacy = type;
+    render();
+};
+
+window.generateResponse = function() {
+    checkCreationDone();
 };
 
 window.finishMusic = function() {
