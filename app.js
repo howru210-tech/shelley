@@ -39,7 +39,8 @@ const i18n = {
         news_title: 'Shelley 리트리트 이벤트', news_desc: '지금 바로 참여 신청을 확인하세요.',
         step_photo: '사진 선택', step_creation: '시/음악 제작', step_share: '발표/공유',
         step_photo_desc: '사진을 업로드하거나 직접 촬영하세요.',
-        upload_folder: '내 폴더에서 선택', take_photo: '직접 사진 찍기'
+        upload_folder: '내 폴더에서 선택', take_photo: '직접 사진 찍기',
+        btn_prev: '이전', btn_next: '다음', btn_finish: '완료'
     },
     en: {
         login: 'Login', logout: 'Logout',
@@ -56,7 +57,8 @@ const i18n = {
         news_title: 'Shelley Retreat Event', news_desc: 'Check your participation application right now.',
         step_photo: 'Select Photo', step_creation: 'Poetry/Music', step_share: 'Share',
         step_photo_desc: 'Upload a photo or take one directly.',
-        upload_folder: 'Select from Folder', take_photo: 'Take a Photo'
+        upload_folder: 'Select from Folder', take_photo: 'Take a Photo',
+        btn_prev: 'Previous', btn_next: 'Next', btn_finish: 'Finish'
     },
     zh: {
         login: '登录', logout: '登出',
@@ -73,7 +75,8 @@ const i18n = {
         news_title: 'Shelley 务虚会活动', news_desc: '立即查看您的参与申请。',
         step_photo: '选择照片', step_creation: '诗歌/音乐创作', step_share: '分享',
         step_photo_desc: '上传照片或直接拍照。',
-        upload_folder: '从文件夹中选择', take_photo: '直接拍照'
+        upload_folder: '从文件夹中选择', take_photo: '直接拍照',
+        btn_prev: '上一步', btn_next: '下一步', btn_finish: '完成'
     },
     es: {
         login: 'Iniciar sesión', logout: 'Cerrar sesión',
@@ -90,7 +93,8 @@ const i18n = {
         news_title: 'Evento de Retiro Shelley', news_desc: 'Compruebe su solicitud de participación ahora mismo.',
         step_photo: 'Seleccionar foto', step_creation: 'Poesía/Música', step_share: 'Compartir',
         step_photo_desc: 'Sube una foto o tómala directamente.',
-        upload_folder: 'Carpeta', take_photo: 'Cámara'
+        upload_folder: 'Carpeta', take_photo: 'Cámara',
+        btn_prev: 'Anterior', btn_next: 'Siguiente', btn_finish: 'Finalizar'
     }
 };
 
@@ -175,8 +179,8 @@ const views = {
             </div>
 
             <div style="display:flex; gap:12px; margin-top:30px; justify-content:space-between;">
-                <button class="btn-secondary" style="flex:1;" onclick="prevStep()">이전</button>
-                <button class="btn-primary" style="flex:1;" onclick="nextStep()">${state.currentStep === steps.length - 1 ? '완료' : '다음'}</button>
+                <button class="btn-secondary" style="flex:1;" onclick="prevStep()">${t('btn_prev') || '이전'}</button>
+                <button class="btn-primary" style="flex:1;" onclick="nextStep()">${state.currentStep === steps.length - 1 ? (t('btn_finish') || '완료') : (t('btn_next') || '다음')}</button>
             </div>
         `;
     },
