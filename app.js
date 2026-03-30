@@ -43,7 +43,9 @@ const i18n = {
         btn_prev: '이전', btn_next: '다음', btn_finish: '완료',
         creation_title: '나만의 시와 음악 만들기', creation_desc: '사진의 감성을 시와 음악으로 승화시킵니다.',
         btn_start_creation: '작품 생성 시작하기', creation_tool_q: '무엇을 먼저 만드시겠어요?',
-        btn_poetry: "'시' 쓰기", btn_music: '음악 만들기'
+        btn_poetry: "'시' 쓰기", btn_music: '음악 만들기',
+        share_title: '발표 준비', share_desc: '작업하신 멋진 작품을 다른 사람들과 함께 감상하시겠어요?',
+        btn_public: '공개 (공유)', btn_private: '비공개 (혼자 보기)', alert_privacy: '공개 여부를 먼저 선택해주세요.'
     },
     en: {
         login: 'Login', logout: 'Logout',
@@ -64,7 +66,9 @@ const i18n = {
         btn_prev: 'Previous', btn_next: 'Next', btn_finish: 'Finish',
         creation_title: 'Create Your Poetry & Music', creation_desc: 'Sublimate the emotion of the photo into poetry and music.',
         btn_start_creation: 'Start Creation', creation_tool_q: 'What would you like to create first?',
-        btn_poetry: 'Write Poetry', btn_music: 'Make Music'
+        btn_poetry: 'Write Poetry', btn_music: 'Make Music',
+        share_title: 'Share Readiness', share_desc: 'Would you like to enjoy your wonderful work with others?',
+        btn_public: 'Public (Share)', btn_private: 'Private (Only me)', alert_privacy: 'Please select public/private status first.'
     },
     zh: {
         login: '登录', logout: '登出',
@@ -85,7 +89,9 @@ const i18n = {
         btn_prev: '上一步', btn_next: '下一步', btn_finish: '完成',
         creation_title: '创作您的诗歌与音乐', creation_desc: '将照片的情感升华为诗歌与音乐。',
         btn_start_creation: '开始创作', creation_tool_q: '您想先创作什么？',
-        btn_poetry: '写诗', btn_music: '制作音乐'
+        btn_poetry: '写诗', btn_music: '制作音乐',
+        share_title: '准备分享', share_desc: '您想与他人分享您的精彩作品吗？',
+        btn_public: '公开 (分享)', btn_private: '私密 (仅自己可见)', alert_privacy: '请先选择公开/私密状态。'
     },
     es: {
         login: 'Iniciar sesión', logout: 'Cerrar sesión',
@@ -106,7 +112,9 @@ const i18n = {
         btn_prev: 'Anterior', btn_next: 'Siguiente', btn_finish: 'Finalizar',
         creation_title: 'Crea tu poesía y música', creation_desc: 'Sublima la emoción de la foto en poesía y música.',
         btn_start_creation: 'Empezar a crear', creation_tool_q: '¿Qué te gustaría crear primero?',
-        btn_poetry: 'Escribir Poesía', btn_music: 'Hacer Música'
+        btn_poetry: 'Escribir Poesía', btn_music: 'Hacer Música',
+        share_title: 'Preparación', share_desc: '¿Te gustaría disfrutar de tu maravillosa obra con los demás?',
+        btn_public: 'Público (Compartir)', btn_private: 'Privado (Solo yo)', alert_privacy: 'Seleccione primero el estado público/privado.'
     }
 };
 
@@ -421,17 +429,17 @@ function renderStepContent() {
             return `
                 <div class="card" style="text-align:center;">
                     <i data-lucide="presentation" style="width:40px; height:40px; margin-bottom:12px; color:var(--primary);"></i>
-                    <h4 style="margin-bottom:8px;">발표 준비</h4>
-                    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:24px;">작업하신 멋진 작품을 다른 사람들과 함께 감상하시겠어요?</p>
+                    <h4 style="margin-bottom:8px;">${t('share_title') || '발표 준비'}</h4>
+                    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:24px;">${t('share_desc') || '작업하신 멋진 작품을 다른 사람들과 함께 감상하시겠어요?'}</p>
                     
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
                         <button class="btn-secondary" style="padding:16px; display:flex; flex-direction:column; align-items:center; gap:12px; ${state.data.privacy === 'public' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="setPrivacy('public')">
                             <i data-lucide="globe" style="width:24px; height:24px;"></i>
-                            <span style="font-weight:bold;">공개 (공유)</span>
+                            <span style="font-weight:bold;">${t('btn_public') || '공개 (공유)'}</span>
                         </button>
                         <button class="btn-secondary" style="padding:16px; display:flex; flex-direction:column; align-items:center; gap:12px; ${state.data.privacy === 'private' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="setPrivacy('private')">
                             <i data-lucide="lock" style="width:24px; height:24px;"></i>
-                            <span style="font-weight:bold;">비공개 (혼자 보기)</span>
+                            <span style="font-weight:bold;">${t('btn_private') || '비공개 (혼자 보기)'}</span>
                         </button>
                     </div>
                 </div>
@@ -467,7 +475,7 @@ window.nextStep = function () {
     
     // 마지막 단계(발표 준비)에서 공개/비공개 선택 안 했을 경우 알림
     if (state.currentStep === 2 && !state.data.privacy) {
-        alert('공개 여부를 먼저 선택해주세요.');
+        alert(t('alert_privacy') || '공개 여부를 먼저 선택해주세요.');
         return;
     }
 
