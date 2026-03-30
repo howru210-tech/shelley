@@ -9,6 +9,7 @@ const state = {
     flow: null, // 'A' or 'B'
     currentStep: 0,
     selectedPhotos: [],
+    locale: 'ko', // 현재 언어 설정 추가
     data: {
         intent: '',
         story: '',
@@ -21,27 +22,95 @@ const state = {
     creationState: 'initial'
 };
 
+const i18n = {
+    ko: {
+        login: '로그인', logout: '로그아웃',
+        nav_home: '홈', nav_flow: '촬영/조회', nav_studio: '스튜디오', nav_store: '스토어',
+        modal_title: '회원가입 / 로그인', modal_email_desc: '이메일 인증을 통해 간편하게 가입 및 로그인하세요.', modal_email_btn: '이메일로 계속하기',
+        home_greetings: '안녕하세요, 작가님.',
+        home_subtitle: '오늘의 순간을 특별한 기록으로 남겨보세요.',
+        home_start: '작업 시작하기',
+        flow_a_title: 'A. 방금 촬영한 사진으로',
+        flow_a_desc: '방금 찍은 소중한 순간들을 바로 공유하고 이야기를 담아보세요.',
+        flow_b_title: 'B. 기존 사진 찾아보기',
+        flow_b_desc: '보관함 속 잊고 있던 추억을 꺼내어 새로운 의미를 부여합니다.',
+        home_news: '최근 소식'
+    },
+    en: {
+        login: 'Login', logout: 'Logout',
+        nav_home: 'Home', nav_flow: 'Capture/View', nav_studio: 'Studio', nav_store: 'Store',
+        modal_title: 'Sign Up / Login', modal_email_desc: 'Easily sign up and login via email verification.', modal_email_btn: 'Continue with Email',
+        home_greetings: 'Hello, Creator.',
+        home_subtitle: 'Make today\'s moments a special record.',
+        home_start: 'Start Working',
+        flow_a_title: 'A. With just taken photos',
+        flow_a_desc: 'Share the precious moments you just captured and tell a story.',
+        flow_b_title: 'B. Browse existing photos',
+        flow_b_desc: 'Bring out forgotten memories from the archive and give them new meaning.',
+        home_news: 'Recent News'
+    },
+    zh: {
+        login: '登录', logout: '登出',
+        nav_home: '首页', nav_flow: '拍摄/查看', nav_studio: '工作室', nav_store: '商店',
+        modal_title: '注册 / 登录', modal_email_desc: '通过电子邮件验证轻松注册和登录。', modal_email_btn: '使用电子邮件继续',
+        home_greetings: '你好，创作者。',
+        home_subtitle: '把今天的瞬间变成特别的记录。',
+        home_start: '开始工作',
+        flow_a_title: 'A. 使用刚刚拍摄的照片',
+        flow_a_desc: '分享刚刚捕捉的珍贵瞬间并讲述背后的故事。',
+        flow_b_title: 'B. 浏览现有照片',
+        flow_b_desc: '从档案中唤醒被遗忘的记忆并赋予新意。',
+        home_news: '最新消息'
+    },
+    es: {
+        login: 'Iniciar sesión', logout: 'Cerrar sesión',
+        nav_home: 'Inicio', nav_flow: 'Captura/Vista', nav_studio: 'Estudio', nav_store: 'Tienda',
+        modal_title: 'Regístrate / Iniciar sesión', modal_email_desc: 'Regístrate e inicia sesión fácilmente mediante verificación por correo.', modal_email_btn: 'Continuar con correo',
+        home_greetings: 'Hola, Creador.',
+        home_subtitle: 'Haz de los momentos de hoy un registro especial.',
+        home_start: 'Comenzar a trabajar',
+        flow_a_title: 'A. Con fotos recién tomadas',
+        flow_a_desc: 'Comparte los momentos preciosos que acabas de capturar y cuenta una historia.',
+        flow_b_title: 'B. Explorar fotos existentes',
+        flow_b_desc: 'Saca a la luz recuerdos olvidados del archivo y dales un nuevo significado.',
+        home_news: 'Noticias recientes'
+    }
+};
+
+window.t = function(key) {
+    return i18n[state.locale][key] || key;
+};
+
+window.updateStaticTexts = function() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[state.locale] && i18n[state.locale][key]) {
+            el.textContent = i18n[state.locale][key];
+        }
+    });
+};
+
 const views = {
     home: () => `
         <div class="hero-card card">
-            <h1>안녕하세요, 작가님.</h1>
-            <p>오늘의 순간을 특별한 기록으로 남겨보세요.</p>
+            <h1>${t('home_greetings')}</h1>
+            <p>${t('home_subtitle')}</p>
         </div>
         
-        <h2 class="section-title">작업 시작하기</h2>
+        <h2 class="section-title">${t('home_start')}</h2>
         <div class="card clickable" onclick="navigateToFlow('A')">
             <div class="card-icon"><i data-lucide="camera-off"></i></div>
-            <h3>A. 방금 촬영한 사진으로</h3>
-            <p>방금 찍은 소중한 순간들을 바로 공유하고 이야기를 담아보세요.</p>
+            <h3>${t('flow_a_title')}</h3>
+            <p>${t('flow_a_desc')}</p>
         </div>
 
         <div class="card clickable" onclick="navigateToFlow('B')">
             <div class="card-icon"><i data-lucide="image"></i></div>
-            <h3>B. 기존 사진 찾아보기</h3>
-            <p>보관함 속 잊고 있던 추억을 꺼내어 새로운 의미를 부여합니다.</p>
+            <h3>${t('flow_b_title')}</h3>
+            <p>${t('flow_b_desc')}</p>
         </div>
 
-        <h2 class="section-title">최근 소식</h2>
+        <h2 class="section-title">${t('home_news')}</h2>
         <div class="card">
             <div style="display:flex; gap:12px; align-items:center;">
                 <div style="width:60px; height:60px; background:#2d3463; border-radius:12px;"></div>
@@ -76,9 +145,7 @@ const views = {
     `,
 
     'flow-wizard': () => {
-        const steps = state.flow === 'A' ?
-            ['사진 선택', '의도 설명', '이야기 공유', '의견 나눔', '시/음악 제작', '발표 준비'] :
-            ['사진 아카이브', '선택 이유', '기억 더듬기', '공감 토크', '예술적 변환', '최종 공유'];
+        const steps = [t('step_photo') || '사진 선택', t('step_creation') || '시/음악 제작', t('step_share') || '발표/공유'];
 
         return `
             <div class="step-indicator">
@@ -90,9 +157,9 @@ const views = {
                 ${renderStepContent()}
             </div>
 
-            <div style="display:flex; gap:12px; margin-top:30px;">
-                ${state.currentStep > 0 ? `<button class="btn-secondary" onclick="prevStep()">이전</button>` : ''}
-                <button class="btn-primary" onclick="nextStep()">${state.currentStep === steps.length - 1 ? '완료' : '다음'}</button>
+            <div style="display:flex; gap:12px; margin-top:30px; justify-content:space-between;">
+                <button class="btn-secondary" style="flex:1;" onclick="prevStep()">이전</button>
+                <button class="btn-primary" style="flex:1;" onclick="nextStep()">${state.currentStep === steps.length - 1 ? '완료' : '다음'}</button>
             </div>
         `;
     },
@@ -164,39 +231,45 @@ const views = {
 `
 };
 
-function renderStepContent() {
-    const isFlowA = state.flow === 'A';
+window.handlePhotoUpload = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const url = URL.createObjectURL(file);
+        const grid = document.getElementById('photo-preview-grid');
+        grid.innerHTML = `
+            <div class="gallery-item selected" onclick="selectPhoto(this)">
+                <img src="${url}" alt="Uploaded Photo">
+            </div>
+        `;
+    }
+};
 
+function renderStepContent() {
     switch (state.currentStep) {
         case 0: // 사진 선택
             return `
-                <p style="margin-bottom:12px; color:var(--text-muted);">${isFlowA ? '방금 찍은 사진 중 공유할 사진을 골라보세요.' : '보관된 사진 중 다시 보고 싶은 사진을 선택하세요.'}</p>
-                <div class="gallery-grid">
-                    <div class="gallery-item selected" onclick="selectPhoto(this)"><img src="sample_photo_1.png" alt="Nature"></div>
-                    <div class="gallery-item" onclick="selectPhoto(this)"><img src="sample_photo_2.png" alt="Camera"></div>
-                    <div class="gallery-item" onclick="selectPhoto(this)"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400" alt="Lake"></div>
-                    <div class="gallery-item" onclick="selectPhoto(this)"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400" alt="Forest"></div>
+                <p style="margin-bottom:12px; color:var(--text-muted);">${t('step_photo_desc')}</p>
+                <div style="display:flex; gap:12px; margin-bottom: 20px;">
+                    <button class="btn-secondary" style="flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; padding:20px;" onclick="document.getElementById('file-upload').click()">
+                        <i data-lucide="folder" style="width:32px; height:32px;"></i>
+                        <span>${t('upload_folder')}</span>
+                    </button>
+                    <button class="btn-primary" style="flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; padding:20px;" onclick="document.getElementById('camera-upload').click()">
+                        <i data-lucide="camera" style="width:32px; height:32px;"></i>
+                        <span>${t('take_photo')}</span>
+                    </button>
+                </div>
+                <!-- 실제 동작하도록 파일 인풋 추가 -->
+                <input type="file" id="file-upload" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
+                <input type="file" id="camera-upload" accept="image/*" capture="environment" style="display:none;" onchange="handlePhotoUpload(event)">
+                
+                <div class="gallery-grid" id="photo-preview-grid">
+                    <!-- 기본 샘플 제공 (또는 업로드된 사진 표시용) -->
+                    <div class="gallery-item selected" onclick="selectPhoto(this)"><img src="sample_photo_1.png" alt="Nature" onerror="this.src='https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400'"></div>
+                    <div class="gallery-item" onclick="selectPhoto(this)"><img src="sample_photo_2.png" alt="Camera" onerror="this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400'"></div>
                 </div>
             `;
-        case 1: // 의도 설명
-            return `
-                <p style="margin-bottom:12px; color:var(--text-muted);">${isFlowA ? '이 사진을 찍게 된 특별한 의도가 무엇인가요?' : '이 사진을 다시 선택하게 된 의도를 설명해주세요.'}</p>
-                <textarea id="intent-input" class="card" style="width:100%; height:120px; color:white; border:1px solid var(--primary);" placeholder="의도를 입력하세요...">${state.data.intent}</textarea>
-            `;
-        case 2: // 이야기 공유
-            return `
-                <p style="margin-bottom:12px; color:var(--text-muted);">${isFlowA ? '함께 나누고 싶은 이야기가 있나요?' : '이 사진을 보며 떠오르는 추억이나 이야기가 있나요?'}</p>
-                <textarea id="story-input" class="card" style="width:100%; height:120px; color:white;" placeholder="이야기를 적어보세요...">${state.data.story}</textarea>
-            `;
-        case 3: // 의견 나눔/공감
-            return `
-                <p style="margin-bottom:12px; color:var(--text-muted);">함께 공유하고 공감할 수 있는 의견을 남겨주세요.</p>
-                <div class="card" style="background:rgba(255,255,255,0.05);">
-                    <p style="font-size:0.9rem; font-style:italic;">"때로는 한 장의 사진이 수만 마디 말보다 큰 울림을 줍니다."</p>
-                </div>
-                <textarea id="resonance-input" class="card" style="width:100%; height:80px; color:white; margin-top:12px;" placeholder="공감되는 의견을 남겨주세요..."></textarea>
-            `;
-        case 4: // 시/음악 제작
+        case 1: // 시/음악 제작
             if (state.creationState === 'initial') {
                 return `
                     <div class="card artwork-gen" style="border: 2px dashed var(--primary); text-align:center; padding:30px 20px;">
@@ -213,20 +286,15 @@ function renderStepContent() {
                return `
                     <h4 style="text-align:center; margin-bottom:20px;">무엇을 먼저 만드시겠어요?</h4>
                     <div style="display:flex; gap:12px; justify-content:center;">
-                        <button class="card clickable" style="flex:1; padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px; margin:0;" onclick="goToCreation('poetry')">
+                        <button class="card clickable" style="flex:1; padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px; margin:0; background:var(--secondary);" onclick="goToCreation('poetry')">
                             <i data-lucide="pen-tool" style="width:32px; height:32px; color:var(--accent);"></i>
-                            <span>'시' 쓰기</span>
+                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">'시' 쓰기</span>
                         </button>
-                        <button class="card clickable" style="flex:1; padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px; margin:0;" onclick="goToCreation('music')">
+                        <button class="card clickable" style="flex:1; padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px; margin:0; background:var(--secondary);" onclick="goToCreation('music')">
                             <i data-lucide="music" style="width:32px; height:32px; color:var(--primary);"></i>
-                            <span>음악 만들기</span>
+                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">음악 만들기</span>
                         </button>
                     </div>
-                    ${state.data.poemText || state.data.musicStyle ? `
-                        <div style="text-align:center; margin-top:20px;">
-                            <button class="btn-primary" onclick="checkCreationDone()">완료 확인하기</button>
-                        </div>
-                    ` : ''}
                 `;
             } else if (state.creationState === 'poetry') {
                 return `
@@ -234,8 +302,23 @@ function renderStepContent() {
                         <button class="icon-btn" onclick="goToCreation('tools')" style="background:none; border:none; color:var(--text-muted);"><i data-lucide="arrow-left"></i></button>
                         <h4 style="margin-left:8px;">'시' 쓰기 공간</h4>
                     </div>
-                    <textarea id="poem-input" class="card" style="width:100%; height:120px; color:white; border:1px solid var(--primary);" placeholder="당신의 감성을 시로 표현해보세요..." onchange="updatePoem(this.value)">${state.data.poemText}</textarea>
+                    <textarea id="poem-input" class="card" style="width:100%; height:120px; border:1px solid var(--primary); ${state.data.poemFont? `font-family:${state.data.poemFont};` : ''} ${state.data.poemSize? `font-size:${state.data.poemSize};` : ''} color:${state.data.poemColor||'#ffffff'}; background:rgba(0,0,0,0.2);" placeholder="당신의 감성을 시로 표현해보세요..." oninput="updatePoem(this.value)">${state.data.poemText || ''}</textarea>
                     
+                    <h5 style="margin-top:20px; margin-bottom:10px;">고급 편집 (글자체/크기/색상)</h5>
+                    <div style="display:flex; gap:10px; margin-bottom:20px;">
+                        <select onchange="state.data.poemFont=this.value; render();" style="flex:1; padding:8px; border-radius:8px; background:var(--secondary); color:var(--text); border:1px solid var(--glass-border);">
+                            <option value="">글꼴 선택</option>
+                            <option value="serif" ${state.data.poemFont==='serif'?'selected':''}>명조체</option>
+                            <option value="sans-serif" ${state.data.poemFont==='sans-serif'?'selected':''}>고딕체</option>
+                        </select>
+                        <select onchange="state.data.poemSize=this.value; render();" style="flex:1; padding:8px; border-radius:8px; background:var(--secondary); color:var(--text); border:1px solid var(--glass-border);">
+                            <option value="">글자 크기</option>
+                            <option value="1.2rem" ${state.data.poemSize==='1.2rem'?'selected':''}>크게</option>
+                            <option value="0.8rem" ${state.data.poemSize==='0.8rem'?'selected':''}>작게</option>
+                        </select>
+                        <input type="color" onchange="state.data.poemColor=this.value; render();" value="${state.data.poemColor||'#ffffff'}" style="width:40px; height:36px; padding:0; border:none; border-radius:8px; background:transparent;">
+                    </div>
+
                     <h5 style="margin-top:20px; margin-bottom:10px;">자막 효과 선택</h5>
                     <div style="display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px;">
                         <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; ${state.data.subtitleEffect === 'fade' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('fade')">페이드</button>
@@ -244,15 +327,17 @@ function renderStepContent() {
                         <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; ${state.data.subtitleEffect === 'zoom' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('zoom')">줌인</button>
                     </div>
 
-                    <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
-                        <button class="btn-primary" onclick="finishPoetry()">시 작성 완료</button>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:20px;">
+                        <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('tools')">이전</button>
+                        <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('later')">시 나중에 쓰기</button>
+                        <button class="btn-primary" style="grid-column: span 2; padding:12px;" onclick="finishPoetry('music')">음악 만들기</button>
                     </div>
                 `;
             } else if (state.creationState === 'music') {
                 return `
                     <div style="display:flex; align-items:center; margin-bottom:12px;">
                         <button class="icon-btn" onclick="goToCreation('tools')" style="background:none; border:none; color:var(--text-muted);"><i data-lucide="arrow-left"></i></button>
-                        <h4 style="margin-left:8px;">음악 작곡 과정</h4>
+                        <h4 style="margin-left:8px;">음악 만들기</h4>
                     </div>
                     <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:16px;">사진과 시에 어울리는 음악 스타일을 선택하세요.</p>
                     
@@ -263,8 +348,9 @@ function renderStepContent() {
                         <button class="btn-secondary" style="padding:16px; ${state.data.musicStyle === 'orchestra' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectMusicStyle('orchestra')">웅장한 오케스트라</button>
                     </div>
 
-                    <div style="display:flex; gap:12px; justify-content:center; margin-top:24px;">
-                        <button class="btn-primary" onclick="finishMusic()">음악 생성 완료</button>
+                    <div style="display:flex; gap:12px; margin-top:24px;">
+                        <button class="btn-secondary" style="flex:1;" onclick="goToCreation('tools')">이전</button>
+                        <button class="btn-primary" style="flex:2;" onclick="finishMusic()">음악 선택 완료</button>
                     </div>
                 `;
             } else if (state.creationState === 'done') {
@@ -298,35 +384,16 @@ function renderStepContent() {
                     </div>
                 `;
             }
-        case 5: // 발표
+        case 2: // 발표 준비/공유
             return `
                 <div class="card" style="text-align:center;">
                     <i data-lucide="presentation" style="width:40px; height:40px; margin-bottom:12px;"></i>
-                    <h4>발표회 진행</h4>
+                    <h4>발표회 진행 및 공유</h4>
                     <p style="font-size:0.9rem; color:var(--text-muted);">지금 이 순간의 감성을 대중 앞에 선보입니다.</p>
                     <div style="margin-top:20px; padding:12px; background:var(--secondary); border-radius:12px;">
                         <p>📍 발표 장소: 메인 스테이지</p>
                         <p>⏰ 시간: 14:00 - 15:30</p>
                     </div>
-                </div>
-            `;
-        case 6: // 업로더 의견
-            return `
-                <h4 style="margin-bottom:12px;">원본 제작자의 생각</h4>
-                <div class="card" style="border-left:4px solid var(--primary);">
-                    <p style="font-size:0.9rem;">"이 사진은 작년에 우연히 발견한 길목에서 촬영되었습니다. 그때의 고요함을 전달하고 싶었어요."</p>
-                    <p style="font-size:0.75rem; color:var(--text-muted); margin-top:8px;">- 익명의 작가</p>
-                </div>
-                <p style="font-size:0.85rem; margin-top:12px;">제작자의 의도를 다시 한 번 생각해보는 시간입니다.</p>
-            `;
-        case 7: // 공감 포인트 공유
-            return `
-                <h4 style="margin-bottom:12px;">종합 의견 및 공감</h4>
-                <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:16px;">'사진'과 '시/음악'에 대해 우리 모두가 나눈 공감 리스트입니다.</p>
-                <div style="display:flex; flex-direction:column; gap:10px;">
-                    <div class="card" style="padding:12px; margin:0;">✨ 고요함 속에 숨겨진 힘</div>
-                    <div class="card" style="padding:12px; margin:0;">🎵 선율로 전하는 위로</div>
-                    <div class="card" style="padding:12px; margin:0;">📸 찰나의 소중함</div>
                 </div>
             `;
         default:
@@ -342,6 +409,9 @@ window.render = function () {
         main.innerHTML = viewFn();
         lucide.createIcons();
     }
+    if (window.updateStaticTexts) {
+        window.updateStaticTexts();
+    }
 };
 
 window.navigateToFlow = function (flowType) {
@@ -353,17 +423,8 @@ window.navigateToFlow = function (flowType) {
 };
 
 window.nextStep = function () {
-    // Save current step data
-    const intent = document.getElementById('intent-input');
-    const story = document.getElementById('story-input');
-    const resonance = document.getElementById('resonance-input');
-
-    if (intent) state.data.intent = intent.value;
-    if (story) state.data.story = story.value;
-    if (resonance) state.data.resonance = resonance.value;
-
-    const steps = 8;
-    if (state.currentStep < steps - 1) {
+    const stepsArray = [t('step_photo'), t('step_creation'), t('step_share')];
+    if (state.currentStep < stepsArray.length - 1) {
         state.currentStep++;
         render();
     } else {
@@ -384,16 +445,16 @@ window.saveToSupabase = async function() {
             {
                 user_id: state.user.id,
                 email: state.user.email,
-                intent: state.data.intent,
-                story: state.data.story,
-                resonance: state.data.resonance,
+                poem_text: state.data.poemText,
+                music_style: state.data.musicStyle,
+                subtitle_effect: state.data.subtitleEffect,
                 flow_type: state.flow
             }
         ]);
         
         if (error) throw error;
 
-        alert('축하합니다! 모든 과정이 완료되었습니다.\\n작성하신 내용은 프리미엄 갤러리에 안전하게 저장되었습니다.');
+        alert('축하합니다! 모든 과정이 완료되었습니다.\n작성하신 내용은 프리미엄 갤러리에 안전하게 저장되었습니다.');
         state.currentView = 'home';
         state.currentStep = 0;
         render();
@@ -406,8 +467,10 @@ window.saveToSupabase = async function() {
 window.prevStep = function () {
     if (state.currentStep > 0) {
         state.currentStep--;
-        render();
+    } else {
+        state.currentView = 'home';
     }
+    render();
 };
 
 // --- Poetry & Music Creation Event Handlers ---
@@ -430,10 +493,17 @@ window.selectEffect = function(effect) {
     render();
 };
 
-window.finishPoetry = function() {
+window.finishPoetry = function(action) {
     const poemInput = document.getElementById('poem-input');
     if (poemInput) state.data.poemText = poemInput.value;
-    checkCreationDone();
+    
+    if (action === 'tools' || action === 'later') {
+        goToCreation('tools');
+    } else if (action === 'music') {
+        goToCreation('music');
+    } else {
+        checkCreationDone();
+    }
 };
 
 window.selectMusicStyle = function(style) {
@@ -527,8 +597,9 @@ window.loadRecords = async function() {
         container.innerHTML = data.map(item => `
             <div style="background:rgba(255,255,255,0.05); padding:10px; border-radius:8px;">
                 <strong>작성자:</strong> ${item.email || '익명'} <br>
-                <strong>의도:</strong> ${item.intent || '없음'} <br>
-                <strong>이야기:</strong> ${item.story || '없음'}
+                <strong>시(Poem):</strong> ${item.poem_text || item.intent || '없음'} <br>
+                <strong>음악:</strong> ${item.music_style || '없음'} <br>
+                <strong>효과:</strong> ${item.subtitle_effect || '기본'}
             </div>
         `).join('');
     } catch(e) {
@@ -553,11 +624,13 @@ supabase.auth.onAuthStateChange((event, session) => {
     if (loginBtn && authStatus) {
         if (state.user) {
             authStatus.textContent = state.user.email + ' 님';
-            loginBtn.textContent = '로그아웃';
+            loginBtn.dataset.i18n = 'logout';
+            loginBtn.textContent = i18n[state.locale]['logout'] || '로그아웃';
             loginBtn.onclick = async () => await supabase.auth.signOut();
         } else {
             authStatus.textContent = '';
-            loginBtn.textContent = '로그인';
+            loginBtn.dataset.i18n = 'login';
+            loginBtn.textContent = i18n[state.locale]['login'] || '로그인';
             loginBtn.onclick = () => {
                 const loginModal = document.getElementById('login-modal');
                 if (loginModal) loginModal.classList.remove('hidden');
@@ -572,6 +645,7 @@ setTimeout(() => {
     const closeModalBtn = document.getElementById('close-modal-btn');
     const googleLoginBtn = document.getElementById('google-login-btn');
     const facebookLoginBtn = document.getElementById('facebook-login-btn');
+    const kakaoLoginBtn = document.getElementById('kakao-login-btn');
     const emailLoginBtn = document.getElementById('email-login-btn');
     const emailInput = document.getElementById('email-input');
 
@@ -590,6 +664,13 @@ setTimeout(() => {
         facebookLoginBtn.onclick = async () => {
             const { error } = await supabase.auth.signInWithOAuth({ provider: 'facebook' });
             if (error) alert('Facebook 로그인 에러: ' + error.message);
+        };
+    }
+    
+    if (kakaoLoginBtn) {
+        kakaoLoginBtn.onclick = async () => {
+            const { error } = await supabase.auth.signInWithOAuth({ provider: 'kakao' });
+            if (error) alert('Kakao 로그인 에러: ' + error.message);
         };
     }
 
@@ -617,6 +698,15 @@ setTimeout(() => {
         };
     }
 }, 100);
+
+// Language Selection Handling
+const langSelector = document.getElementById('lang-selector');
+if (langSelector) {
+    langSelector.addEventListener('change', (e) => {
+        state.locale = e.target.value;
+        render(); // Re-render to update the view
+    });
+}
 
 // Initial Render
 render();

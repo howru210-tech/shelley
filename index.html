@@ -18,8 +18,14 @@
         <header class="app-header">
             <div class="logo">Shelley <span>Event</span></div>
             <div class="header-actions">
+                <select id="lang-selector" style="width: auto; padding: 4px 8px; font-size: 0.8rem; margin-right: 8px; background: var(--card-bg); border: 1px solid var(--glass-border); color: var(--text-main); border-radius: 8px; outline: none; cursor: pointer;">
+                    <option value="ko">한국어</option>
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                    <option value="es">Español</option>
+                </select>
                 <span id="auth-status" style="font-size: 0.8rem; margin-right: 8px; color: var(--text-muted);"></span>
-                <button id="login-btn" class="btn-secondary" style="padding: 4px 10px; font-size: 0.8rem; margin-right: 8px;">로그인</button>
+                <button id="login-btn" class="btn-secondary" style="padding: 4px 10px; font-size: 0.8rem; margin-right: 8px;" data-i18n="login">로그인</button>
                 <button id="admin-toggle" class="icon-btn" title="관리자">
                     <i data-lucide="shield"></i>
                 </button>
@@ -35,19 +41,19 @@
         <nav class="bottom-nav">
             <button class="nav-item active" data-view="home">
                 <i data-lucide="home"></i>
-                <span>홈</span>
+                <span data-i18n="nav_home">홈</span>
             </button>
             <button class="nav-item" data-view="flow-selection">
                 <i data-lucide="camera"></i>
-                <span>촬영/조회</span>
+                <span data-i18n="nav_flow">촬영/조회</span>
             </button>
             <button class="nav-item" data-view="studio">
                 <i data-lucide="palette"></i>
-                <span>스튜디오</span>
+                <span data-i18n="nav_studio">스튜디오</span>
             </button>
             <button class="nav-item" data-view="store">
                 <i data-lucide="shopping-bag"></i>
-                <span>스토어</span>
+                <span data-i18n="nav_store">스토어</span>
             </button>
         </nav>
     </div>
@@ -55,10 +61,11 @@
     <!-- Login Modal -->
     <div id="login-modal" class="modal hidden">
         <div class="modal-content card" style="position: relative;">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 24px;">회원가입 / 로그인</h2>
+            <h2 class="section-title" style="text-align: center; margin-bottom: 24px;" data-i18n="modal_title">회원가입 / 로그인</h2>
             <div style="margin-bottom: 20px;">
                 <input type="email" id="email-input" class="input-field" placeholder="이메일 주소를 입력하세요">
-                <button id="email-login-btn" class="btn-primary" style="margin-top: 12px;">이메일로 계속하기</button>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; text-align: center;" data-i18n="modal_email_desc">이메일 인증을 통해 간편하게 가입 및 로그인하세요.</p>
+                <button id="email-login-btn" class="btn-primary" style="margin-top: 12px;" data-i18n="modal_email_btn">이메일로 계속하기</button>
             </div>
             
             <div class="divider">
@@ -73,6 +80,11 @@
             <button id="facebook-login-btn" class="btn-secondary" style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 12px; background-color: rgba(24, 119, 242, 0.1); border-color: rgba(24, 119, 242, 0.3);">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 Facebook 계정으로 연결
+            </button>
+            
+            <button id="kakao-login-btn" class="btn-secondary" style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 12px; background-color: rgba(254, 229, 0, 0.9); border-color: #fee500; color: #000000; font-weight: 600;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#000000"><path d="M12 3c-5.522 0-10 3.52-10 7.86 0 2.802 1.838 5.253 4.605 6.643l-.92 3.428c-.066.248.068.508.31.542.103.015.202-.022.28-.1L10.33 18.2c.548.077 1.107.12 1.67.12 5.522 0 10-3.52 10-7.86S17.522 3 12 3z"/></svg>
+                Kakao 계정으로 연결
             </button>
 
             <button id="close-modal-btn" class="icon-btn" style="position: absolute; top: 16px; right: 16px; background: none; border: none; color: white;">
