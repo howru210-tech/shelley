@@ -315,4 +315,41 @@ main::-webkit-scrollbar {
 .divider span {
     padding: 0 10px;
     font-size: 0.85rem;
+}
+
+/* Subtitle Effects */
+@keyframes effectFade {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+}
+
+@keyframes effectSlide {
+    from { transform: translateX(-10px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes effectZoom {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes effectTypewriter {
+    from { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+    to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
+
+.effect-fade {
+    animation: effectFade 1.5s ease-in-out;
+}
+
+.effect-slide {
+    animation: effectSlide 1s ease-out;
+}
+
+.effect-zoom {
+    animation: effectZoom 1s ease-out;
+}
+
+.effect-typewriter {
+    animation: effectTypewriter 3s steps(40, end);
 }

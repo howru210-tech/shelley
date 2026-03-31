@@ -18,6 +18,7 @@ const state = {
         poemText: '',
         subtitleEffect: '',
         musicStyle: '',
+        musicTrack: '',
         privacy: null
     },
     creationState: 'initial'
@@ -26,8 +27,8 @@ const state = {
 const i18n = {
     ko: {
         login: '로그인', logout: '로그아웃',
-        nav_home: '홈', nav_flow: '보기/메모', nav_studio: '내 작품 모두', nav_store: '스토어',
-        mode_a_title: '보기-내 작품 모두', mode_b_title: '메모-연결 서비스', studio_title: '내 작품 모두', filter_text: '내가 쓴 글', filter_music: '음악', filter_all: '사진+글+음악', filter_desc: '생성 날짜 순으로 정렬됩니다.',
+        nav_home: '홈', nav_flow: '보기/메모', nav_studio: '꾸미기', nav_store: '스토어',
+        mode_a_title: '보기-내 작품 모두', mode_b_title: '메모-연결 서비스', studio_title: '꾸미기', filter_text: '글', filter_music: '음악', filter_all: '사진', filter_desc: '생성 날짜 순으로 정렬됩니다.',
         banner_title: '추천 연결 서비스', banner_desc: '사진과 함께 활용하기 좋은 앱을 소개합니다.', app_edit: '사진 꾸미기', app_frame: '디지털 액자', app_print: '사진 인쇄', app_music: '음악 만들기', app_link_desc: '추천 앱 이동',
         modal_title: '회원가입 / 로그인', modal_email_desc: '이메일 인증을 통해 간편하게 가입 및 로그인하세요.', modal_email_btn: '이메일로 계속하기',
         home_greetings: '안녕하세요, 작가님.',
@@ -49,12 +50,17 @@ const i18n = {
         share_title: '발표 준비', share_desc: '작업하신 멋진 작품을 다른 사람들과 함께 감상하시겠어요?',
         btn_public: '공개 (공유)', btn_private: '비공개 (혼자 보기)', alert_privacy: '공개 여부를 먼저 선택해주세요.', alert_login_required: '저장하려면 로그인이 필요합니다. 상단 로그인 버튼을 이용해주세요.',
         modal_email_placeholder: '이메일 주소를 입력하세요', modal_or: '또는',
-        modal_google: 'Google 계정으로 연결', modal_facebook: 'Facebook 계정으로 연결', modal_kakao: 'Kakao 계정으로 연결'
+        modal_google: 'Google 계정으로 연결', modal_facebook: 'Facebook 계정으로 연결', modal_kakao: 'Kakao 계정으로 연결',
+        poem_placeholder: '당신의 감성을 시로 표현해보세요...', poem_adv_edit: '고급 편집 (글자체/크기/색상)',
+        font_sel: '글꼴 선택', font_serif: '명조체', font_sans: '고딕체', font_nanum: '나눔펜', font_jua: '주아', font_gowun: '고운돋움', font_song: '송명', font_gaegu: '개구쟁이',
+        size_sel: '글자 크기', size_up: '점점 크게', size_down: '점점 작게',
+        effect_sel: '자막 효과 선택', effect_fade: '페이드', effect_type: '타자방식', effect_slide: '슬라이드', effect_zoom: '줌인',
+        btn_write_later: '시 나중에 쓰기'
     },
     en: {
         login: 'Login', logout: 'Logout',
-        nav_home: 'Home', nav_flow: 'View/Memo', nav_studio: 'All My Works', nav_store: 'Store',
-        mode_a_title: 'View - All My Works', mode_b_title: 'Memo - Connection Service', studio_title: 'All My Works', filter_text: 'My Texts', filter_music: 'Music', filter_all: 'Photo+Text+Music', filter_desc: 'Sorted by creation date.',
+        nav_home: 'Home', nav_flow: 'View/Memo', nav_studio: 'Decorate', nav_store: 'Store',
+        mode_a_title: 'View - All My Works', mode_b_title: 'Memo - Connection Service', studio_title: 'Decorate', filter_text: 'Text', filter_music: 'Music', filter_all: 'Photo', filter_desc: 'Sorted by creation date.',
         banner_title: 'Recommended Connection Services', banner_desc: 'Introducing great apps to use with your photos.', app_edit: 'Photo Decoration', app_frame: 'Digital Frame', app_print: 'Photo Print', app_music: 'Music Creation', app_link_desc: 'Go to recommended app',
         modal_title: 'Sign Up / Login', modal_email_desc: 'Easily sign up and login via email verification.', modal_email_btn: 'Continue with Email',
         home_greetings: 'Hello, Creator.',
@@ -76,12 +82,17 @@ const i18n = {
         share_title: 'Share Readiness', share_desc: 'Would you like to enjoy your wonderful work with others?',
         btn_public: 'Public (Share)', btn_private: 'Private (Only me)', alert_privacy: 'Please select public/private status first.', alert_login_required: 'Login required to save. Please use the login button at the top.',
         modal_email_placeholder: 'Enter your email address', modal_or: 'OR',
-        modal_google: 'Continue with Google', modal_facebook: 'Continue with Facebook', modal_kakao: 'Continue with Kakao'
+        modal_google: 'Continue with Google', modal_facebook: 'Continue with Facebook', modal_kakao: 'Continue with Kakao',
+        poem_placeholder: 'Express your feelings with poetry...', poem_adv_edit: 'Advanced Edit (Font/Size/Color)',
+        font_sel: 'Select Font', font_serif: 'Serif', font_sans: 'Sans-Serif', font_nanum: 'Nanum Pen', font_jua: 'Jua', font_gowun: 'Gowun', font_song: 'Song Myung', font_gaegu: 'Gaegu',
+        size_sel: 'Font Size', size_up: 'Grow Larger', size_down: 'Grow Smaller',
+        effect_sel: 'Subtitle Effect', effect_fade: 'Fade', effect_type: 'Typewriter', effect_slide: 'Slide', effect_zoom: 'Zoom In',
+        btn_write_later: 'Write Poetry Later'
     },
     zh: {
         login: '登录', logout: '登出',
-        nav_home: '首页', nav_flow: '查看/备忘录', nav_studio: '我所有的作品', nav_store: '商店',
-        mode_a_title: '查看 - 我所有的作品', mode_b_title: '备忘录 - 连接服务', studio_title: '我的所有作品', filter_text: '我写的文字', filter_music: '音乐', filter_all: '照片+文字+音乐', filter_desc: '按创建日期排序。',
+        nav_home: '首页', nav_flow: '查看/备忘录', nav_studio: '装饰', nav_store: '商店',
+        mode_a_title: '查看 - 我所有的作品', mode_b_title: '备忘录 - 连接服务', studio_title: '装饰', filter_text: '文字', filter_music: '音乐', filter_all: '照片', filter_desc: '按创建日期排序。',
         banner_title: '推荐连接服务', banner_desc: '介绍与您的照片一起使用的好应用。', app_edit: '照片装饰', app_frame: '数码相框', app_print: '照片打印', app_music: '音乐制作', app_link_desc: '前往推荐应用',
         modal_title: '注册 / 登录', modal_email_desc: '通过电子邮件验证轻松注册和登录。', modal_email_btn: '使用电子邮件继续',
         home_greetings: '你好，创作者。',
@@ -103,12 +114,17 @@ const i18n = {
         share_title: '准备分享', share_desc: '您想与他人分享您的精彩作品吗？',
         btn_public: '公开 (分享)', btn_private: '私密 (仅自己可见)', alert_privacy: '请先选择公开/私密状态。', alert_login_required: '保存需要登录。请使用顶部的登录按钮。',
         modal_email_placeholder: '请输入您的电子邮箱地址', modal_or: '或者',
-        modal_google: '连接 Google 账号', modal_facebook: '连接 Facebook 账号', modal_kakao: '连接 Kakao 账号'
+        modal_google: '连接 Google 账号', modal_facebook: '连接 Facebook 账号', modal_kakao: '连接 Kakao 账号',
+        poem_placeholder: '用诗歌表达你的情感...', poem_adv_edit: '高级编辑 (字体/大小/颜色)',
+        font_sel: '选择字体', font_serif: '衬线体', font_sans: '无衬线体', font_nanum: 'Nanum 笔', font_jua: 'Jua', font_gowun: 'Gowun', font_song: 'Song Myung', font_gaegu: 'Gaegu',
+        size_sel: '字体大小', size_up: '逐渐放大', size_down: '逐渐缩小',
+        effect_sel: '字幕效果选择', effect_fade: '淡入淡出', effect_type: '打字机', effect_slide: '滑动', effect_zoom: '放大',
+        btn_write_later: '以后写诗'
     },
     es: {
         login: 'Iniciar sesión', logout: 'Cerrar sesión',
-        nav_home: 'Inicio', nav_flow: 'Ver/Memo', nav_studio: 'Todas mis obras', nav_store: 'Tienda',
-        mode_a_title: 'Ver - Todas mis obras', mode_b_title: 'Memo - Servicio de conexión', studio_title: 'Todas mis obras', filter_text: 'Mis textos', filter_music: 'Música', filter_all: 'Foto+Texto+Música', filter_desc: 'Ordenado por fecha de creación.',
+        nav_home: 'Inicio', nav_flow: 'Ver/Memo', nav_studio: 'Decorar', nav_store: 'Tienda',
+        mode_a_title: 'Ver - Todas mis obras', mode_b_title: 'Memo - Servicio de conexión', studio_title: 'Decorar', filter_text: 'Texto', filter_music: 'Música', filter_all: 'Foto', filter_desc: 'Ordenado por fecha de creación.',
         banner_title: 'Servicios de conexión recomendados', banner_desc: 'Presentamos excelentes aplicaciones para usar con tus fotos.', app_edit: 'Decoración de fotos', app_frame: 'Marco digital', app_print: 'Impresión de fotos', app_music: 'Creación de música', app_link_desc: 'Ir a la aplicación',
         modal_title: 'Regístrate / Iniciar sesión', modal_email_desc: 'Regístrate e inicia sesión fácilmente mediante verificación por correo.', modal_email_btn: 'Continuar con correo',
         home_greetings: 'Hola, Creador.',
@@ -130,7 +146,12 @@ const i18n = {
         share_title: 'Preparación', share_desc: '¿Te gustaría disfrutar de tu maravillosa obra con los demás?',
         btn_public: 'Público (Compartir)', btn_private: 'Privado (Solo yo)', alert_privacy: 'Seleccione primero el estado público/privado.', alert_login_required: 'Es necesario iniciar sesión para guardar. Utilice el botón de inicio de sesión en la parte superior.',
         modal_email_placeholder: 'Introduzca su dirección de correo electrónico', modal_or: 'O',
-        modal_google: 'Conectar con Google', modal_facebook: 'Conectar con Facebook', modal_kakao: 'Conectar con Kakao'
+        modal_google: 'Conectar con Google', modal_facebook: 'Conectar con Facebook', modal_kakao: 'Conectar con Kakao',
+        poem_placeholder: 'Expresa tus emociones con poesía...', poem_adv_edit: 'Edición avanzada (Fuente/Tamaño/Color)',
+        font_sel: 'Seleccionar fuente', font_serif: 'Serif', font_sans: 'Sans-Serif', font_nanum: 'Nanum Pen', font_jua: 'Jua', font_gowun: 'Gowun', font_song: 'Song Myung', font_gaegu: 'Gaegu',
+        size_sel: 'Tamaño de fuente', size_up: 'Agrandar', size_down: 'Encoger',
+        effect_sel: 'Efecto de subtítulo', effect_fade: 'Desvanecer', effect_type: 'Máquina escribir', effect_slide: 'Deslizar', effect_zoom: 'Acercar',
+        btn_write_later: 'Escribir poesía luego'
     }
 };
 
@@ -186,25 +207,56 @@ const views = {
         </div>
     `,
 
-    'flow-selection': () => `
-        <h2 class="section-title">모드 선택</h2>
-        <div class="card" onclick="navigateToFlow('A')">
-            <h3>${t('mode_a_title')}</h3>
-            <ul style="margin-left: 1.2rem; margin-top: 8px; font-size: 0.85rem; color: var(--text-muted);">
-                <li>공유 사진 결정</li>
-                <li>촬영 의도 설명</li>
-                <li>음악/시 결합</li>
-            </ul>
-            <button class="btn-primary" style="margin-top:16px;">시작하기</button>
-        </div>
-        <div class="card" onclick="navigateToFlow('B')">
-            <h3>${t('mode_b_title')}</h3>
-            <ul style="margin-left: 1.2rem; margin-top: 8px; font-size: 0.85rem; color: var(--text-muted);">
-                <li>사진 아카이브 검색</li>
-                <li>선택 의도 기록</li>
-                <li>프리젠테이션 준비</li>
-            </ul>
-            <button class="btn-secondary" style="margin-top:16px;">시작하기</button>
+    'my-works': () => `
+        <h2 class="section-title">보기-내 작품 모두</h2>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:20px;">내 작품을 감상하고 메모를 남기거나 다른 사람들에게 공개할 수 있습니다.</p>
+        
+        <div style="display:flex; flex-direction:column; gap:24px;">
+            <!-- Work Item 1 -->
+            <div class="card" style="padding:0; overflow:hidden; border-radius:12px; margin:0;">
+                <!-- Thumbnail Area -->
+                <div style="aspect-ratio:16/9; background:#1e1e2d; position:relative; background-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&fit=crop'); background-size:cover; background-position:center;">
+                    <!-- Checkbox for Public -->
+                    <div style="position:absolute; top:12px; right:12px; background:rgba(0,0,0,0.6); padding:6px 10px; border-radius:8px; display:flex; align-items:center; gap:6px; z-index:10;">
+                        <input type="checkbox" id="public_check_1" checked style="width:16px; height:16px; accent-color:var(--primary); cursor:pointer;" onchange="toggleMyWorksPublic(1, this.checked)">
+                        <label for="public_check_1" style="font-size:0.8rem; color:white; cursor:pointer;">공개</label>
+                    </div>
+                </div>
+                <!-- Action & Memo Area -->
+                <div style="padding:16px; background:var(--secondary);">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                        <div>
+                            <h4 style="margin-bottom:4px;">봄바람의 속삭임</h4>
+                            <p style="font-size:0.75rem; color:var(--text-muted);">잔잔한 피아노, 나눔펜글씨</p>
+                        </div>
+                        <div style="font-size:0.75rem; color:var(--text-muted);">2024.03.31</div>
+                    </div>
+                    <textarea class="input-field" style="width:100%; height:70px; padding:10px; font-size:0.85rem; resize:none; border:1px solid var(--glass-border); border-radius:8px; background:rgba(0,0,0,0.2); color:white;" placeholder="이 작품에 대한 메모나 영감을 작성하세요..." onchange="saveMyWorksMemo(1, this.value)">사진을 보며 느꼈던 따뜻한 마음을 기록합니다.</textarea>
+                </div>
+            </div>
+
+            <!-- Work Item 2 -->
+            <div class="card" style="padding:0; overflow:hidden; border-radius:12px; margin:0;">
+                <!-- Thumbnail Area -->
+                <div style="aspect-ratio:16/9; background:#1e1e2d; position:relative; background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=600&fit=crop'); background-size:cover; background-position:center;">
+                    <!-- Checkbox for Public -->
+                    <div style="position:absolute; top:12px; right:12px; background:rgba(0,0,0,0.6); padding:6px 10px; border-radius:8px; display:flex; align-items:center; gap:6px; z-index:10;">
+                        <input type="checkbox" id="public_check_2" style="width:16px; height:16px; accent-color:var(--primary); cursor:pointer;" onchange="toggleMyWorksPublic(2, this.checked)">
+                        <label for="public_check_2" style="font-size:0.8rem; color:white; cursor:pointer;">공개</label>
+                    </div>
+                </div>
+                <!-- Action & Memo Area -->
+                <div style="padding:16px; background:var(--secondary);">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                        <div>
+                            <h4 style="margin-bottom:4px;">별빛 아래 산책</h4>
+                            <p style="font-size:0.75rem; color:var(--text-muted);">어쿠스틱 기타, 명조체</p>
+                        </div>
+                        <div style="font-size:0.75rem; color:var(--text-muted);">2024.03.29</div>
+                    </div>
+                    <textarea class="input-field" style="width:100%; height:70px; padding:10px; font-size:0.85rem; resize:none; border:1px solid var(--glass-border); border-radius:8px; background:rgba(0,0,0,0.2); color:white;" placeholder="이 작품에 대한 메모나 영감을 작성하세요..." onchange="saveMyWorksMemo(2, this.value)"></textarea>
+                </div>
+            </div>
         </div>
     `,
 
@@ -268,7 +320,66 @@ const views = {
                 </div>
             </div>
             
-            <button class="btn-secondary" style="width:100%; margin-top:24px;" onclick="state.currentView='flow-selection'; render();">${t('btn_prev') || '이전'}</button>
+            <button class="btn-secondary" style="width:100%; margin-top:24px;" onclick="state.currentView='studio'; render();">${t('btn_prev') || '이전'}</button>
+        </div>
+    `,
+
+    'public-gallery': () => `
+        <h2 class="section-title">작품 감상하기 <i data-lucide="youtube" style="display:inline-block; vertical-align:middle; width:24px; color:var(--primary);"></i></h2>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:20px;">여러 사람들이 창작한 멋진 시와 음악 작품을 감상해보세요.</p>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+            <div class="card" style="padding:16px; border-radius:12px;">
+                <div style="display:flex; align-items:center; margin-bottom:12px;">
+                    <div style="width:36px; height:36px; border-radius:50%; background:var(--primary); margin-right:12px; display:flex; align-items:center; justify-content:center;"><i data-lucide="user"></i></div>
+                    <div>
+                        <div style="font-weight:bold;">행복한 작가</div>
+                        <div style="font-size:0.75rem; color:var(--text-muted);">2시간 전</div>
+                    </div>
+                </div>
+                <div style="aspect-ratio:16/9; background:#000; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; position:relative;">
+                    <i data-lucide="play-circle" style="width:48px; height:48px; color:rgba(255,255,255,0.8);"></i>
+                </div>
+                <p style="font-size:0.9rem;">별이 빛나는 밤에 쓴 작은 시 한 편입니다.</p>
+            </div>
+            <div class="card" style="padding:16px; border-radius:12px;">
+                <div style="display:flex; align-items:center; margin-bottom:12px;">
+                    <div style="width:36px; height:36px; border-radius:50%; background:var(--accent); color:#000; margin-right:12px; display:flex; align-items:center; justify-content:center;"><i data-lucide="user"></i></div>
+                    <div>
+                        <div style="font-weight:bold;">봄을기다려</div>
+                        <div style="font-size:0.75rem; color:var(--text-muted);">하루 전</div>
+                    </div>
+                </div>
+                <div style="aspect-ratio:16/9; background:#000; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; position:relative;">
+                    <i data-lucide="play-circle" style="width:48px; height:48px; color:rgba(255,255,255,0.8);"></i>
+                </div>
+                <p style="font-size:0.9rem;">어쿠스틱 기타와 함께하는 나의 첫 작품</p>
+            </div>
+        </div>
+        <button class="btn-secondary" style="margin-top:24px; width:100%;" onclick="state.currentView='home'; render();">홈으로 돌아가기</button>
+    `,
+
+    'recitation': () => `
+        <h2 class="section-title">낭송 연습</h2>
+        <div class="card" style="text-align:center;">
+            <i data-lucide="mic" style="width:48px; height:48px; margin-bottom:16px; color:var(--accent);"></i>
+            <h3 style="margin-bottom:8px;">스튜디오 낭송 모드</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:24px;">나만의 작품을 직접 목소리로 녹음해보세요.</p>
+            
+            <div style="background:rgba(0,0,0,0.2); padding:20px; border-radius:12px; margin-bottom:24px; border:1px solid var(--primary); text-align:left;">
+                <p style="font-size:1.1rem; line-height:1.6; min-height:100px;">
+                    ${state.data.poemText ? state.data.poemText.replace(/\n/g, '<br>') : '작성된 시가 없습니다.'}
+                </p>
+            </div>
+            
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                <button class="btn-primary" style="background:var(--secondary); border:1px solid var(--primary); color:white; padding:16px; display:flex; flex-direction:column; align-items:center; gap:8px;" onclick="alert('녹음을 시작합니다...')">
+                    <i data-lucide="mic" style="width:24px;"></i> 녹음하기
+                </button>
+                <button class="btn-primary" style="background:var(--secondary); border:1px solid var(--accent); color:white; padding:16px; display:flex; flex-direction:column; align-items:center; gap:8px;" onclick="alert('반복 듣기를 시작합니다...')">
+                    <i data-lucide="repeat" style="width:24px;"></i> 반복듣기
+                </button>
+            </div>
+            <button class="btn-secondary" style="margin-top:24px; width:100%;" onclick="state.currentView='studio'; render();">내 작품 모두 보기</button>
         </div>
     `,
 
@@ -295,27 +406,25 @@ const views = {
     studio: () => `
     <h2 class="section-title">${t('studio_title')}</h2>
     <div class="card">
-        <h3>디지털 자산 관리 (Photo + Poem + Music)</h3>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">사진에 감성을 더해 가치를 창출하세요.</p>
         
         <div style="display:flex; gap:10px; margin-bottom:8px; overflow-x:auto; padding-bottom:10px;">
+            <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; font-size:0.85rem;">${t('filter_all')}</button>
             <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; font-size:0.85rem;">${t('filter_text')}</button>
             <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; font-size:0.85rem;">${t('filter_music')}</button>
-            <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; font-size:0.85rem;">${t('filter_all')}</button>
         </div>
         <p style="font-size:0.75rem; color:var(--text-muted); text-align:right; margin-bottom:20px;">✓ ${t('filter_desc')}</p>
 
         <div class="revenue-grid" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:12px;">
-            <div class="card" style="margin:0; text-align:center;">
+            <div class="card clickable" style="margin:0; text-align:center;" onclick="state.currentView='connection-service'; render();">
                 <i data-lucide="edit-3"></i><br>고급 편집
             </div>
-            <div class="card" style="margin:0; text-align:center;">
+            <div class="card clickable" style="margin:0; text-align:center;" onclick="state.currentView='connection-service'; render();">
                 <i data-lucide="layout"></i><br>디지털 프레임
             </div>
-            <div class="card" style="margin:0; text-align:center;">
+            <div class="card clickable" style="margin:0; text-align:center;" onclick="state.currentView='connection-service'; render();">
                 <i data-lucide="printer"></i><br>인화 서비스
             </div>
-            <div class="card" style="margin:0; text-align:center;">
+            <div class="card clickable" style="margin:0; text-align:center;" onclick="state.currentView='connection-service'; render();">
                 <i data-lucide="music-2"></i><br>음원 출시
             </div>
         </div>
@@ -394,75 +503,94 @@ function renderStepContent() {
                 
                 <div class="gallery-grid" id="photo-preview-grid">
                     <!-- 기본 샘플 제공 (또는 업로드된 사진 표시용) -->
-                    <div class="gallery-item selected" onclick="selectPhoto(this)"><img src="sample_photo_1.png" alt="Nature" onerror="this.src='https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400'"></div>
-                    <div class="gallery-item" onclick="selectPhoto(this)"><img src="sample_photo_2.png" alt="Camera" onerror="this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400'"></div>
-                </div>
-            `;
-    case 1: // 시/음악 제작
-            if (state.creationState === 'initial') {
-                return `
-                    <div class="card artwork-gen" style="border: 2px dashed var(--primary); text-align:center; padding:30px 20px;">
-                        <div style="display:flex; justify-content:center; gap:20px; margin-bottom:20px;">
-                            <i data-lucide="pen-tool" style="width:32px; height:32px; color:var(--accent);"></i>
-                            <i data-lucide="music" style="width:32px; height:32px; color:var(--primary);"></i>
-                        </div>
-                        <h4>${t('creation_title') || '나만의 시와 음악 만들기'}</h4>
-                        <p style="font-size:0.8rem; margin-top:8px; color:var(--text-muted);">${t('creation_desc') || "사진의 감성을 '시'와 '음악'으로 승화시킵니다."}</p>
-                        <button class="btn-primary" style="margin-top:20px; width:auto; padding:12px 24px;" onclick="startCreation()">${t('btn_start_creation') || '작품 생성 시작하기'}</button>
-                    </div>
-                `;
-            } else if (state.creationState === 'tools') {
-               return `
-                    <h4 style="text-align:center; margin-bottom:20px;">${t('creation_tool_q') || '무엇을 먼저 만드시겠어요?'}</h4>
-                    <div style="display:flex; gap:12px; justify-content:center;">
-                        <button class="card clickable" style="flex:1; padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px; margin:0; background:var(--secondary);" onclick="goToCreation('poetry')">
-                            <i data-lucide="pen-tool" style="width:32px; height:32px; color:var(--accent);"></i>
-                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">${t('btn_poetry') || "'시' 쓰기"}</span>
-                        </button>
-                        <button class="card clickable" style="flex:1; padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px; margin:0; background:var(--secondary);" onclick="goToCreation('music')">
-                            <i data-lucide="music" style="width:32px; height:32px; color:var(--primary);"></i>
-                            <span style="color:var(--text); font-weight:bold; text-shadow:0 1px 2px rgba(0,0,0,0.5);">${t('btn_music') || '음악 만들기'}</span>
-                        </button>
-                    </div>
-                `;
-            } else if (state.creationState === 'poetry') {
+                    <div class="gallery-item sele            } else if (state.creationState === 'poetry') {
+                const effectClass = state.data.subtitleEffect ? `effect-${state.data.subtitleEffect}` : '';
                 return `
                     <div style="display:flex; align-items:center; margin-bottom:12px;">
                         <button class="icon-btn" onclick="goToCreation('tools')" style="background:none; border:none; color:var(--text-muted);"><i data-lucide="arrow-left"></i></button>
-                        <h4 style="margin-left:8px;">'시' 쓰기 공간</h4>
+                        <h4 style="margin-left:8px;">${t('btn_poetry')}</h4>
                     </div>
-                    <textarea id="poem-input" class="card" style="width:100%; height:120px; border:1px solid var(--primary); ${state.data.poemFont? `font-family:${state.data.poemFont};` : ''} ${state.data.poemSize? `font-size:${state.data.poemSize};` : ''} color:${state.data.poemColor||'#ffffff'}; background:rgba(0,0,0,0.2);" placeholder="당신의 감성을 시로 표현해보세요..." oninput="updatePoem(this.value)">${state.data.poemText || ''}</textarea>
+                    <textarea id="poem-input" class="card ${effectClass}" style="width:100%; height:120px; border:1px solid var(--primary); ${state.data.poemFont? `font-family:'${state.data.poemFont}', sans-serif;` : ''} ${state.data.poemSize? `font-size:${state.data.poemSize};` : ''} color:${state.data.poemColor||'#ffffff'}; background:rgba(0,0,0,0.2); transition: transform 0.3s ease, font-size 0.3s ease;" placeholder="${t('poem_placeholder')}" oninput="updatePoem(this.value)">${state.data.poemText || ''}</textarea>
                     
-                    <h5 style="margin-top:20px; margin-bottom:10px;">고급 편집 (글자체/크기/색상)</h5>
+                    <h5 style="margin-top:20px; margin-bottom:10px;">${t('poem_adv_edit')}</h5>
                     <div style="display:flex; gap:10px; margin-bottom:20px;">
-                        <select onchange="state.data.poemFont=this.value; render();" style="flex:1; padding:8px; border-radius:8px; background:var(--secondary); color:var(--text); border:1px solid var(--glass-border);">
-                            <option value="">글꼴 선택</option>
-                            <option value="serif" ${state.data.poemFont==='serif'?'selected':''}>명조체</option>
-                            <option value="sans-serif" ${state.data.poemFont==='sans-serif'?'selected':''}>고딕체</option>
+                        <select onchange="state.data.poemFont=this.value; render();" style="flex:1; padding:8px; border-radius:8px; background:var(--secondary); color:var(--text-main); border:1px solid var(--glass-border);">
+                            <option value="">${t('font_sel')}</option>
+                            <option value="serif" ${state.data.poemFont==='serif'?'selected':''}>${t('font_serif')}</option>
+                            <option value="sans-serif" ${state.data.poemFont==='sans-serif'?'selected':''}>${t('font_sans')}</option>
+                            <option value="Nanum Pen Script" ${state.data.poemFont==='Nanum Pen Script'?'selected':''}>${t('font_nanum')}</option>
+                            <option value="Jua" ${state.data.poemFont==='Jua'?'selected':''}>${t('font_jua')}</option>
+                            <option value="Gowun Dodum" ${state.data.poemFont==='Gowun Dodum'?'selected':''}>${t('font_gowun')}</option>
+                            <option value="Song Myung" ${state.data.poemFont==='Song Myung'?'selected':''}>${t('font_song')}</option>
+                            <option value="Gaegu" ${state.data.poemFont==='Gaegu'?'selected':''}>${t('font_gaegu')}</option>
                         </select>
-                        <select onchange="state.data.poemSize=this.value; render();" style="flex:1; padding:8px; border-radius:8px; background:var(--secondary); color:var(--text); border:1px solid var(--glass-border);">
-                            <option value="">글자 크기</option>
-                            <option value="1.2rem" ${state.data.poemSize==='1.2rem'?'selected':''}>크게</option>
-                            <option value="0.8rem" ${state.data.poemSize==='0.8rem'?'selected':''}>작게</option>
+                        <select onchange="state.data.poemSize=this.value; render();" style="flex:1; padding:8px; border-radius:8px; background:var(--secondary); color:var(--text-main); border:1px solid var(--glass-border);">
+                            <option value="">${t('size_sel')}</option>
+                            <option value="1.5rem" ${state.data.poemSize==='1.5rem'?'selected':''}>${t('size_up')}</option>
+                            <option value="0.75rem" ${state.data.poemSize==='0.75rem'?'selected':''}>${t('size_down')}</option>
                         </select>
                         <input type="color" onchange="state.data.poemColor=this.value; render();" value="${state.data.poemColor||'#ffffff'}" style="width:40px; height:36px; padding:0; border:none; border-radius:8px; background:transparent;">
                     </div>
 
-                    <h5 style="margin-top:20px; margin-bottom:10px;">자막 효과 선택</h5>
+                    <h5 style="margin-top:20px; margin-bottom:10px;">${t('effect_sel')}</h5>
                     <div style="display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px;">
-                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; ${state.data.subtitleEffect === 'fade' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('fade')">페이드</button>
-                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; ${state.data.subtitleEffect === 'typewriter' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('typewriter')">타자방식</button>
-                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; ${state.data.subtitleEffect === 'slide' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('slide')">슬라이드</button>
-                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; ${state.data.subtitleEffect === 'zoom' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('zoom')">줌인</button>
+                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; ${state.data.subtitleEffect === 'fade' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('fade')">${t('effect_fade')}</button>
+                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; ${state.data.subtitleEffect === 'typewriter' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('typewriter')">${t('effect_type')}</button>
+                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; ${state.data.subtitleEffect === 'slide' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('slide')">${t('effect_slide')}</button>
+                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; ${state.data.subtitleEffect === 'zoom' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('zoom')">${t('effect_zoom')}</button>
                     </div>
 
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:20px;">
-                        <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('tools')">이전</button>
-                        <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('later')">시 나중에 쓰기</button>
-                        <button class="btn-primary" style="grid-column: span 2; padding:12px;" onclick="finishPoetry('music')">음악 만들기</button>
+                        <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('tools')">${t('btn_prev')}</button>
+                        <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('later')">${t('btn_write_later')}</button>
+                        <button class="btn-primary" style="grid-column: span 2; padding:12px;" onclick="finishPoetry('music')">${t('btn_music')}</button>
                     </div>
-                `;
+                `;'?'selected':''}>\${t('font_song')}</option>
+                            <option value="Gaegu" \${state.data.poemFont==='Gaegu'?'selected':''}>\${t('font_gaegu')}</option>
+                        </select>
+                        <select onchange="state.data.poemSize=this.value; render();" style="flex:1; padding:8px; border-radius:8px; background:var(--secondary); color:var(--text-main); border:1px solid var(--glass-border);">
+                            <option value="">\${t('size_sel')}</option>
+                            <option value="1.5rem" \${state.data.poemSize==='1.5rem'?'selected':''}>\${t('size_up')}</option>
+                            <option value="0.75rem" \${state.data.poemSize==='0.75rem'?'selected':''}>\${t('size_down')}</option>
+                        </select>
+                        <input type="color" onchange="state.data.poemColor=this.value; render();" value="\${state.data.poemColor||'#ffffff'}" style="width:40px; height:36px; padding:0; border:none; border-radius:8px; background:transparent;">
+                    </div>
+
+                    <h5 style="margin-top:20px; margin-bottom:10px;">\${t('effect_sel')}</h5>
+                    <div style="display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px;">
+                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; \${state.data.subtitleEffect === 'fade' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('fade')">\${t('effect_fade')}</button>
+                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; \${state.data.subtitleEffect === 'typewriter' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('typewriter')">\${t('effect_type')}</button>
+                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; \${state.data.subtitleEffect === 'slide' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('slide')">\${t('effect_slide')}</button>
+                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; \${state.data.subtitleEffect === 'zoom' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('zoom')">\${t('effect_zoom')}</button>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:20px;">
+                        <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('tools')">\${t('btn_prev')}</button>
+                        <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('later')">\${t('btn_write_later')}</button>
+                        <button class="btn-primary" style="grid-column: span 2; padding:12px;" onclick="finishPoetry('music')">\${t('btn_music')}</button>
+                    </div>
+                \`;
             } else if (state.creationState === 'music') {
+                const musicTracksData = {
+                    piano: [ '새벽의 이슬', '별빛 아래 산책', '조용한 위로', '비 오는 날의 창가', '잊혀진 기억' ],
+                    acoustic: [ '봄바람의 속삭임', '모닥불가의 추억', '너와 걷는 길', '노을 지는 언덕', '따뜻한 오후' ],
+                    synth: [ '우주의 끝에서', '자각몽', '도시의 네온사인', '시공간의 경계', '사이버펑크 비트' ],
+                    orchestra: [ '영웅의 귀환', '새로운 여정의 시작', '전투의 서막', '별빛의 서사시', '마지막 희망' ]
+                };
+
+                const tracksMarkup = state.data.musicStyle && musicTracksData[state.data.musicStyle] ? `
+                    <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--glass-border);" class="fade-in">
+                        <h5 style="margin-bottom:12px;">음악 트랙 선택</h5>
+                        <div style="display:flex; flex-direction:column; gap:8px;">
+                            ${musicTracksData[state.data.musicStyle].map(track => `
+                                <button class="btn-secondary" style="text-align:left; padding:12px 16px; ${state.data.musicTrack === track ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectMusicTrack('${track}')">
+                                    <i data-lucide="music" style="width:16px; height:16px; margin-right:8px; vertical-align:middle;"></i>${track}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : '';
+
                 return `
                     <div style="display:flex; align-items:center; margin-bottom:12px;">
                         <button class="icon-btn" onclick="goToCreation('tools')" style="background:none; border:none; color:var(--text-muted);"><i data-lucide="arrow-left"></i></button>
@@ -476,6 +604,8 @@ function renderStepContent() {
                         <button class="btn-secondary" style="padding:16px; ${state.data.musicStyle === 'synth' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectMusicStyle('synth')">몽환적인 신스</button>
                         <button class="btn-secondary" style="padding:16px; ${state.data.musicStyle === 'orchestra' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectMusicStyle('orchestra')">웅장한 오케스트라</button>
                     </div>
+
+                    ${tracksMarkup}
 
                     <div style="display:flex; gap:12px; margin-top:24px;">
                         <button class="btn-secondary" style="flex:1;" onclick="goToCreation('tools')">이전</button>
@@ -514,6 +644,31 @@ function renderStepContent() {
                 `;
             }
         case 2: // 발표 준비/공유
+            let subActions = '';
+            if (state.data.privacy === 'public') {
+                subActions = `
+                    <div class="fade-in" style="margin-top:24px; display:flex; gap:12px; justify-content:center;">
+                        <button class="btn-primary" style="flex:1; padding:12px; font-size:0.9rem;" onclick="goToPublicGallery()">
+                            <i data-lucide="youtube" style="width:18px; margin-right:6px; vertical-align:middle;"></i>작품 감상하기
+                        </button>
+                        <button class="btn-primary" style="flex:1; padding:12px; background:var(--accent); color:#000; font-size:0.9rem;" onclick="exportToSNS()">
+                            <i data-lucide="share-2" style="width:18px; margin-right:6px; vertical-align:middle;"></i>내보내기
+                        </button>
+                    </div>
+                `;
+            } else if (state.data.privacy === 'private') {
+                subActions = `
+                    <div class="fade-in" style="margin-top:24px; display:flex; gap:12px; justify-content:center;">
+                        <button class="btn-primary" style="flex:1; padding:12px; font-size:0.9rem;" onclick="saveAndGoToStudio()">
+                            <i data-lucide="save" style="width:18px; margin-right:6px; vertical-align:middle;"></i>저장하기
+                        </button>
+                        <button class="btn-primary" style="flex:1; padding:12px; background:var(--accent); color:#000; font-size:0.9rem;" onclick="startRecitation()">
+                            <i data-lucide="mic" style="width:18px; margin-right:6px; vertical-align:middle;"></i>낭송연습
+                        </button>
+                    </div>
+                `;
+            }
+
             return `
                 <div class="card" style="text-align:center;">
                     <i data-lucide="presentation" style="width:40px; height:40px; margin-bottom:12px; color:var(--primary);"></i>
@@ -530,6 +685,8 @@ function renderStepContent() {
                             <span style="font-weight:bold;">${t('btn_private') || '비공개 (혼자 보기)'}</span>
                         </button>
                     </div>
+                    
+                    ${subActions}
                 </div>
             `;
         default:
@@ -552,7 +709,7 @@ window.render = function () {
 
 window.navigateToFlow = function (flowType) {
     if (flowType === 'B') {
-        state.currentView = 'connection-service';
+        state.currentView = 'public-gallery';
         render();
         return;
     }
@@ -581,7 +738,7 @@ window.nextStep = function () {
     }
 };
 
-window.saveToSupabase = async function() {
+window.saveToSupabase = async function(callback) {
     if (!state.user) {
         alert(t('alert_login_required') || '저장하려면 로그인이 필요합니다. 상단 로그인 버튼을 이용해주세요.');
         return;
@@ -603,14 +760,49 @@ window.saveToSupabase = async function() {
         
         if (error) throw error;
 
-        alert('축하합니다! 모든 과정이 완료되었습니다.\n작성하신 내용은 프리미엄 갤러리에 안전하게 저장되었습니다.');
-        state.currentView = 'home';
-        state.currentStep = 0;
-        render();
+        alert('작성하신 내용은 보관함에 안전하게 저장되었습니다.');
+        
+        if (typeof callback === 'function') {
+            callback();
+        } else {
+            state.currentView = 'home';
+            state.currentStep = 0;
+            render();
+        }
     } catch (e) {
         console.error('DB 저장 에러:', e);
         alert('저장 중 오류가 발생했습니다: ' + e.message);
     }
+};
+
+window.goToPublicGallery = function() {
+    window.saveToSupabase(() => {
+        state.currentView = 'public-gallery';
+        render();
+    });
+};
+
+window.exportToSNS = function() {
+    window.saveToSupabase(() => {
+        alert('내보내기 옵션 모달 활성화 : YouTube, Facebook 등 다양한 SNS로 뷰를 공유합니다.');
+    });
+};
+
+window.saveAndGoToStudio = function() {
+    window.saveToSupabase(() => {
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        const studioNav = document.querySelector('.nav-item[data-view="studio"]');
+        if(studioNav) studioNav.classList.add('active');
+        state.currentView = 'studio';
+        render();
+    });
+};
+
+window.startRecitation = function() {
+    window.saveToSupabase(() => {
+        state.currentView = 'recitation';
+        render();
+    });
 };
 
 window.prevStep = function () {
@@ -656,7 +848,15 @@ window.finishPoetry = function(action) {
 };
 
 window.selectMusicStyle = function(style) {
+    if (state.data.musicStyle !== style) {
+        state.data.musicTrack = '';
+    }
     state.data.musicStyle = style;
+    render();
+};
+
+window.selectMusicTrack = function(track) {
+    state.data.musicTrack = track;
     render();
 };
 
@@ -675,14 +875,15 @@ window.finishMusic = function() {
 
 window.checkCreationDone = function() {
     const hasPoem = state.data.poemText && state.data.poemText.trim() !== '';
-    const hasMusic = state.data.musicStyle && state.data.musicStyle !== '';
+    const hasMusic = state.data.musicStyle && state.data.musicStyle !== '' && state.data.musicTrack && state.data.musicTrack !== '';
     
     if (hasPoem && hasMusic) {
         state.creationState = 'done';
     } else {
         state.creationState = 'tools';
         if (!hasPoem) alert('시 작성을 완료해주세요.');
-        else if (!hasMusic) alert('음악 스타일을 선택해주세요.');
+        else if (!state.data.musicStyle) alert('음악 스타일을 선택해주세요.');
+        else if (!state.data.musicTrack) alert('세부 음악 트랙을 선택해주세요.');
     }
     render();
 };
@@ -733,6 +934,19 @@ document.getElementById('admin-toggle').addEventListener('click', () => {
 window.selectPhoto = function (el) {
     document.querySelectorAll('.gallery-item').forEach(item => item.classList.remove('selected'));
     el.classList.add('selected');
+};
+
+window.toggleMyWorksPublic = function(id, isPublic) {
+    if (isPublic) {
+        alert('이 작품이 공개 갤러리에 노출됩니다.');
+    } else {
+        alert('이 작품이 비공개로 전환되었습니다.');
+    }
+};
+
+window.saveMyWorksMemo = function(id, text) {
+    console.log('Memo saved for ' + id + ':', text);
+    alert('메모가 저장되었습니다.');
 };
 
 // --- Supabase DB Read Example ---
