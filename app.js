@@ -503,7 +503,45 @@ function renderStepContent() {
                 
                 <div class="gallery-grid" id="photo-preview-grid">
                     <!-- 기본 샘플 제공 (또는 업로드된 사진 표시용) -->
-                    <div class="gallery-item sele            } else if (state.creationState === 'poetry') {
+                    <div class="gallery-item selected" onclick="selectPhoto(this)">
+                        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=500&fit=crop" alt="풍경">
+                    </div>
+                    <div class="gallery-item" onclick="selectPhoto(this)">
+                        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500&fit=crop" alt="야경">
+                    </div>
+                </div>
+            `;
+        case 1: // 시/음악 제작
+            if (state.creationState === 'initial') {
+                return `
+                    <div class="card fade-in" style="text-align:center;">
+                        <h3 style="margin-bottom:12px;">${t('creation_title')}</h3>
+                        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:24px;">${t('creation_desc')}</p>
+                        
+                        <div style="aspect-ratio:16/9; background:#1e1e2d; border-radius:12px; margin-bottom:24px; overflow:hidden; position:relative;">
+                            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&fit=crop" style="width:100%; height:100%; object-fit:cover;">
+                        </div>
+
+                        <button class="btn-primary" style="padding:16px; font-size:1.1rem; width:100%;" onclick="startCreation()">${t('btn_start_creation')}</button>
+                    </div>
+                `;
+            } else if (state.creationState === 'tools') {
+               return `
+                    <div class="card fade-in" style="text-align:center;">
+                        <h3 style="margin-bottom:24px;">${t('creation_tool_q')}</h3>
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                            <button class="btn-secondary" style="padding:24px; display:flex; flex-direction:column; align-items:center; gap:12px;" onclick="goToCreation('poetry')">
+                                <i data-lucide="pen-tool" style="width:32px; height:32px; color:var(--primary);"></i>
+                                <span style="font-size:1.1rem; font-weight:bold;">${t('btn_poetry')}</span>
+                            </button>
+                            <button class="btn-secondary" style="padding:24px; display:flex; flex-direction:column; align-items:center; gap:12px;" onclick="goToCreation('music')">
+                                <i data-lucide="music" style="width:32px; height:32px; color:var(--accent);"></i>
+                                <span style="font-size:1.1rem; font-weight:bold;">${t('btn_music')}</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (state.creationState === 'poetry') {
                 const effectClass = state.data.subtitleEffect ? `effect-${state.data.subtitleEffect}` : '';
                 return `
                     <div style="display:flex; align-items:center; margin-bottom:12px;">
@@ -545,31 +583,7 @@ function renderStepContent() {
                         <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('later')">${t('btn_write_later')}</button>
                         <button class="btn-primary" style="grid-column: span 2; padding:12px;" onclick="finishPoetry('music')">${t('btn_music')}</button>
                     </div>
-                `;'?'selected':''}>\${t('font_song')}</option>
-                            <option value="Gaegu" \${state.data.poemFont==='Gaegu'?'selected':''}>\${t('font_gaegu')}</option>
-                        </select>
-                        <select onchange="state.data.poemSize=this.value; render();" style="flex:1; padding:8px; border-radius:8px; background:var(--secondary); color:var(--text-main); border:1px solid var(--glass-border);">
-                            <option value="">\${t('size_sel')}</option>
-                            <option value="1.5rem" \${state.data.poemSize==='1.5rem'?'selected':''}>\${t('size_up')}</option>
-                            <option value="0.75rem" \${state.data.poemSize==='0.75rem'?'selected':''}>\${t('size_down')}</option>
-                        </select>
-                        <input type="color" onchange="state.data.poemColor=this.value; render();" value="\${state.data.poemColor||'#ffffff'}" style="width:40px; height:36px; padding:0; border:none; border-radius:8px; background:transparent;">
-                    </div>
-
-                    <h5 style="margin-top:20px; margin-bottom:10px;">\${t('effect_sel')}</h5>
-                    <div style="display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px;">
-                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; \${state.data.subtitleEffect === 'fade' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('fade')">\${t('effect_fade')}</button>
-                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; \${state.data.subtitleEffect === 'typewriter' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('typewriter')">\${t('effect_type')}</button>
-                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; \${state.data.subtitleEffect === 'slide' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('slide')">\${t('effect_slide')}</button>
-                        <button class="btn-secondary" style="width:auto; padding:8px 16px; margin:0; \${state.data.subtitleEffect === 'zoom' ? 'background:var(--primary); border-color:var(--primary);' : ''}" onclick="selectEffect('zoom')">\${t('effect_zoom')}</button>
-                    </div>
-
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:20px;">
-                        <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('tools')">\${t('btn_prev')}</button>
-                        <button class="btn-secondary" style="padding:12px;" onclick="finishPoetry('later')">\${t('btn_write_later')}</button>
-                        <button class="btn-primary" style="grid-column: span 2; padding:12px;" onclick="finishPoetry('music')">\${t('btn_music')}</button>
-                    </div>
-                \`;
+                `;
             } else if (state.creationState === 'music') {
                 const musicTracksData = {
                     piano: [ '새벽의 이슬', '별빛 아래 산책', '조용한 위로', '비 오는 날의 창가', '잊혀진 기억' ],
